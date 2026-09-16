@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monitor de pH</title>
+<style>
+  :root {
+    --cor-fundo: #0f172a;
+    --cor-card: #1e293b;
+    --cor-texto: #e2e8f0;
+    --cor-acento: #38bdf8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cor-fundo);
+    color: var(--cor-texto);
+    font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  }
+  .card {
+    background: var(--cor-card);
+    border-radius: 20px;
+    padding: 40px 50px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    min-width: 320px;
+  }
+  h1 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #94a3b8;
+    margin-bottom: 10px;
+  }
+  .ph-valor {
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--cor-acento);
+    margin: 10px 0;
+    transition: color 0.4s ease;
+  }
+  .status {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: #cbd5e1;
+  }
+  .info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #94a3b8;
+    border-top: 1px solid #334155;
+    padding-top: 15px;
+    margin-top: 10px;
+  }
+  .bolinha {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #22c55e;
+    margin-right: 6px;
+    animation: piscar 1.5s infinite;
+  }
+  @keyframes piscar {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1><span class="bolinha"></span>Monitor de pH da água</h1>
+    <div class="ph-valor" id="ph-valor">--</div>
+    <div class="status" id="ph-status">Aguardando primeira leitura...</div>
+    <div class="info">
+      <span id="ph-tensao">Tensão: --</span>
+      <span id="ph-hora">Última leitura: --</span>
+    </div>
+  </div>
+
+<script>
+  const INTERVALO_MS = 3000; // consulta a API a cada 3 segundos
+
+  function classificarPH(ph) {
+    if (ph < 6.5) return { texto: "Ácida", cor: "#f87171" };
+    if (ph > 7.5) return { texto: "Alcalina", cor: "#a78bfa" };
+    return { texto: "Neutra (ideal)", cor: "#4ade80" };
+  }
+
+  async function atualizar() {
+    try {
+      const resposta = await fetch("/api/ph/latest");
+      const dados = await resposta.json();
+
+      const elValor = document.getElementById("ph-valor");
+      const elStatus = document.getElementById("ph-status");
+      const elTensao = document.getElementById("ph-tensao");
+      const elHora = document.getElementById("ph-hora");
+
+      if (dados.ph === null) {
+        elStatus.textContent = "Nenhuma leitura recebida ainda";
+        return;
+      }
+
+      const classificacao = classificarPH(dados.ph);
+      elValor.textContent = dados.ph.toFixed(2);
+      elValor.style.color = classificacao.cor;
+      elStatus.textContent = `${classificacao.texto} — dispositivo: ${dados.device ?? "desconhecido"}`;
+      elTensao.textContent = `Tensão: ${dados.voltage !== null && dados.voltage !== undefined ? dados.voltage.toFixed(3) + " V" : "--"}`;
+      elHora.textContent = ` | Última leitura: ${dados.timestamp}`;
+    } catch (erro) {
+      document.getElementById("ph-status").textContent = "Erro ao consultar o servidor";
+    }
+  }
+
+  atualizar();
+  setInterval(atualizar, INTERVALO_MS);
+</script>
+</body>
+</html>

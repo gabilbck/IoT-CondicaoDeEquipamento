@@ -1,0 +1,7 @@
+services:
+  ph-server:
+    build: .
+    container_name: monitor-ph-server
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
