@@ -4,4 +4,13 @@ services:
     container_name: monitor-ph-server
     ports:
       - "8000:8000"
+    environment:
+      - MQTT_BROKER=test.mosquitto.org
+      - MQTT_PORT=8883   # 1883 costuma ser bloqueada na rede; 8883 = MQTT com TLS
+      - MQTT_TLS=1
+      - TOPICO_PH=sistema/aquario/ph
+      - TOPICO_ATUADOR=sistema/aquario/atuador
+      - PH_MIN=6.5
+      - PH_MAX=7.5
+      - PYTHONUNBUFFERED=1
     restart: unless-stopped

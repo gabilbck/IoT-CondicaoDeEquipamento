@@ -1,0 +1,7 @@
+# Credenciais locais do firmware
+codigo/secrets.h
+
+# Python
+__pycache__/
+*.pyc
+.env

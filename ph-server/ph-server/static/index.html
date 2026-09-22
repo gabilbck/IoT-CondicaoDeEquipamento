@@ -79,6 +79,7 @@
     <h1><span class="bolinha"></span>Monitor de pH da água</h1>
     <div class="ph-valor" id="ph-valor">--</div>
     <div class="status" id="ph-status">Aguardando primeira leitura...</div>
+    <div class="status" id="ph-atuador">Atuador (comando MQTT): --</div>
     <div class="info">
       <span id="ph-tensao">Tensão: --</span>
       <span id="ph-hora">Última leitura: --</span>
@@ -103,6 +104,9 @@
       const elStatus = document.getElementById("ph-status");
       const elTensao = document.getElementById("ph-tensao");
       const elHora = document.getElementById("ph-hora");
+
+      const elAtuador = document.getElementById("ph-atuador");
+      elAtuador.textContent = `Atuador (comando MQTT): ${dados.atuador ?? "sem comando ainda"}`;
 
       if (dados.ph === null) {
         elStatus.textContent = "Nenhuma leitura recebida ainda";

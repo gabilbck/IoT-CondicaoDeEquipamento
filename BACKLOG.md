@@ -33,3 +33,14 @@
 | T29 | Testar temperatura acima do limite             | A definir   | A fazer |
 | T30 | Registrar primeiro risco técnico               | A definir   | A fazer |
 | T31 | Realizar teste final do protótipo              | A definir   | A fazer |
+
+## Adequação ao critério IoT da N1 (sensor → MQTT → comando → atuador)
+
+| ID  | Tarefa                                                          | Responsável | Status   |
+| --- | --------------------------------------------------------------- | ----------- | -------- |
+| T32 | ESP32 publicar leitura de pH em `sistema/aquario/ph`           | A definir   | Feito    |
+| T33 | Servidor assinar `sistema/aquario/ph` (paho-mqtt)              | A definir   | A testar |
+| T34 | Servidor comparar pH com a faixa e publicar em `.../atuador`    | A definir   | A testar |
+| T35 | ESP32 assinar `sistema/aquario/atuador` e acionar LED (GPIO 2) | A definir   | A testar |
+| T36 | Mover credenciais do Wi-Fi para `secrets.h` (fora do Git)       | A definir   | Feito    |
+| T37 | Teste: parar servidor e confirmar que o atuador não muda        | A definir   | A fazer  |

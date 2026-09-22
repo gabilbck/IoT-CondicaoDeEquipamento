@@ -1,155 +1,78 @@
 # IoT-CondicaoDeEquipamento
 
-# Condição de Equipamento
+# Condição de Equipamento — Monitor de pH com ESP32 + MQTT
 
 ## Integrantes
 
-* Gabrieli Eduarda Lembeck
-* Heloisa Rebello Cabral
-* Julio Bezerra de Mattos Manoel
-* Mileine da Silva de Freitas
-* Thomas Henry Steinback
+- Gabrieli Eduarda Lembeck
+- Heloisa Rebello Cabral
+- Julio Bezerra de Mattos Manoel
+- Mileine da Silva de Freitas
+- Thomas Henry Steinback
 
 ## Família temática
 
 **Internet das Coisas (IoT) — Monitoramento de condições de equipamentos.**
 
-## Problema
+## O que o sistema faz
 
-Equipamentos eletrônicos, como computadores, notebooks e celulares, podem apresentar problemas relacionados ao aumento excessivo de temperatura. Quando a temperatura ultrapassa um determinado limite, o usuário pode não perceber imediatamente, o que pode causar perda de desempenho, desligamentos ou possíveis danos ao equipamento.
+Um ESP32 lê um sensor de pH (PH-4502C), mostra o valor num display OLED e **publica a leitura via Wi-Fi em um tópico MQTT**. Um servidor (FastAPI em Docker) **assina esse tópico**, compara o pH com a faixa normal e **publica um comando MQTT** de volta. O ESP32 **assina o tópico de comando** e só então aciona o atuador.
 
-O projeto busca desenvolver uma solução simples de monitoramento capaz de identificar quando a temperatura de um equipamento está fora da faixa considerada normal e alertar o usuário.
+O firmware **não decide** nada sobre o atuador: sem a rede e o broker MQTT, o atuador não é acionado.
 
-## Usuário e contexto de uso
+## Arquitetura
 
-O sistema será destinado a usuários que desejam acompanhar a temperatura de diferentes equipamentos eletrônicos.
+```
+ Sensor pH ──► ESP32 ──Wi-Fi──► Broker MQTT ──► Servidor (ph-server)
+                                 (publish)          │  assina sistema/aquario/ph
+                                                    │  compara com a faixa normal
+ Atuador ◄── ESP32 ◄──Wi-Fi──── Broker MQTT ◄───────┘  publica sistema/aquario/atuador
+ (LED GPIO2)   (subscribe + callback)
 
-O protótipo poderá representar três tipos de equipamentos:
-
-* CPU/computador;
-* Notebook;
-* Celular.
-
-O usuário poderá selecionar o equipamento que deseja monitorar. O sistema exibirá a temperatura atual no display e verificará se ela está dentro da condição considerada normal.
-
-## Objetivo da N1
-
-Desenvolver um protótipo com Arduino capaz de monitorar a temperatura de diferentes equipamentos, apresentar a temperatura atual em um display e emitir um alerta visual e sonoro quando a temperatura estiver acima do limite definido.
-
-O sistema deverá:
-
-1. Permitir a seleção do equipamento a ser monitorado.
-2. Medir ou simular a temperatura do equipamento selecionado.
-3. Exibir a temperatura atual no display.
-4. Comparar a temperatura medida com um limite definido.
-5. Identificar uma condição de temperatura fora do normal.
-6. Acionar um LED piscante quando houver uma condição de alerta.
-7. Emitir um sinal sonoro por meio de um buzzer quando houver uma condição de alerta.
-
-## Funcionamento inicial
-
-O usuário selecionará no sistema qual equipamento deseja monitorar.
-
-Após a seleção, o Arduino apresentará no display o equipamento escolhido e sua temperatura atual.
-
-A temperatura será comparada com um limite definido para aquele equipamento. Enquanto a temperatura estiver dentro da faixa normal, o sistema permanecerá em estado normal.
-
-Caso a temperatura ultrapasse o limite estabelecido, o sistema entrará em estado de alerta, fazendo com que:
-
-* o LED comece a piscar;
-* o buzzer emita um sinal sonoro;
-* o display informe que a temperatura está fora do normal.
-
-### Exemplo
-
-**Equipamento:** Notebook
-**Temperatura:** 65 °C
-**Estado:** Normal
-
-Caso a temperatura ultrapasse o limite:
-
-**Equipamento:** Notebook
-**Temperatura:** 90 °C
-**Estado:** ALERTA
-**LED:** Piscando
-**Buzzer:** Ligado
-
-## Componentes previstos
-
-* Arduino;
-* Sensor de temperatura;
-* Display LCD ou OLED;
-* LED;
-* Buzzer;
-* Botões para seleção do equipamento;
-* Resistores;
-* Protoboard;
-* Jumpers;
-* Cabo USB;
-* Computador para programação e testes.
-
-A definição exata dos componentes poderá ser ajustada durante os testes em laboratório.
-
-## Arquitetura inicial
-
-O sistema terá o Arduino como unidade central de processamento.
-
-```text
-Usuário
-   |
-   v
-Botões
-   |
-   v
-Arduino <---- Sensor de temperatura
-   |
-   +----> Display
-   |
-   +----> LED
-   |
-   +----> Buzzer
+ ESP32 ──HTTP POST /api/ph──► Servidor ──► Dashboard web (apenas visualização)
 ```
 
-O Arduino será responsável por receber a seleção do equipamento, obter a temperatura, comparar o valor com o limite definido e controlar os dispositivos de saída.
+## Tópicos MQTT
 
-## Backlog inicial
+| Tópico                     | Quem publica | Quem assina | Conteúdo                         |
+| -------------------------- | ------------ | ----------- | -------------------------------- |
+| `sistema/aquario/ph`      | ESP32        | Servidor    | `{"ph":7.02,"tensao":2.513}`     |
+| `sistema/aquario/atuador` | Servidor     | ESP32       | `ON` ou `OFF` (mensagem retida)  |
 
-| ID | Tarefa                                             | 
-| -- | -------------------------------------------------- | 
-| 01 | Criar repositório do projeto                       |
-| 02 | Criar e preencher o README inicial                 | 
-| 03 | Identificar o sensor de temperatura disponível     |
-| 04 | Testar a leitura do sensor no Arduino              |
-| 05 | Testar o funcionamento do display                  | 
-| 06 | Exibir uma temperatura no display                  |
-| 07 | Testar botão de seleção                            |
-| 08 | Definir os equipamentos disponíveis para seleção   | 
-| 09 | Definir os limites de temperatura dos equipamentos |
-| 10 | Testar o LED piscante                              |
-| 11 | Testar o buzzer                                    |
-| 12 | Implementar comparação da temperatura com o limite |
-| 13 | Implementar alerta visual de temperatura           |
-| 14 | Implementar alerta sonoro de temperatura           |
-| 15 | Integrar seleção, sensor, display e alertas        |
-| 16 | Realizar teste completo do protótipo               |
-| 17 | Registrar resultados e problemas encontrados       | 
+Broker: `test.mosquitto.org:1883`. Faixa normal: pH 6.5 a 7.5 (configurável no `docker-compose.yml`).
+
+## Hardware
+
+- ESP32 DevKit
+- Sensor de pH PH-4502C (saída analógica no GPIO 35)
+- Display OLED SSD1306 128x64 (I2C: SDA 21, SCL 22)
+- **Atuador:** LED embutido da placa (GPIO 2), sem ligações extras
+
+## Como rodar
+
+**Servidor**
+
+```bash
+cd ph-server/ph-server
+docker compose up --build
+```
+
+Dashboard: `http://<IP-da-máquina>:8000` · Estado do MQTT: `http://<IP-da-máquina>:8000/api/status`
+
+**Firmware**
+
+1. Copie `codigo/secrets.example.h` para `codigo/secrets.h` e preencha Wi-Fi e IP do servidor.
+2. Bibliotecas: `PubSubClient`, `Adafruit SSD1306`, `Adafruit GFX`.
+3. Grave `codigo/leituraPh.c++` no ESP32 (`codigo/calibracao.c++` serve só para calibrar o sensor).
+
+## Como demonstrar o requisito de IoT
+
+1. Com tudo rodando, coloque o sensor numa solução fora da faixa: o servidor publica `ON` e o LED acende.
+2. Pare o servidor (`docker compose stop`): o pH continua sendo lido, mas o atuador **não muda mais de estado**. Isso prova que o comando vem da rede, não do firmware.
+3. Opcional: acompanhe os tópicos com `mosquitto_sub -h test.mosquitto.org -t "sistema/aquario/#" -v`.
 
 ## Primeiro risco técnico
 
-**Risco:** o sensor de temperatura disponível pode não representar adequadamente a temperatura real de diferentes equipamentos, principalmente porque o projeto pretende representar CPU, notebook e celular.
+**Risco:** o broker público pode ficar instável ou indisponível durante a apresentação.
 
-**Impacto:** as temperaturas medidas podem não corresponder às temperaturas reais dos equipamentos, dificultando a validação dos limites.
-
-**Investigação:** testar o sensor disponível no laboratório e verificar se ele consegue fornecer leituras estáveis. Caso necessário, utilizar diferentes valores de referência para representar os equipamentos durante o protótipo.
-
-## Dúvidas para o professor
-
-* Podemos utilizar um único sensor para representar os diferentes equipamentos?
-* Os equipamentos podem ser representados por valores de temperatura simulados durante a demonstração?
-* Podemos definir limites de temperatura diferentes para CPU, notebook e celular?
-* Qual modelo de display e sensor de temperatura é recomendado para o projeto?
-* A seleção dos equipamentos pode ser realizada por botões físicos?
-
-## Estado atual
-
-O projeto está em fase inicial de planejamento. Nesta etapa, o objetivo é definir a ideia, os componentes, a arquitetura inicial, os primeiros testes e as tarefas necessárias para desenvolver o protótipo.
+**Mitigação:** os tópicos usam prefixo único e o comando é publicado como mensagem retida. Se necessário, trocar o broker por um Mosquitto local alterando `mqtt_server` no firmware e `MQTT_BROKER` no `docker-compose.yml`.
