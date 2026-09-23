@@ -3,6 +3,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include <WiFi.h>
+#include <WiFiClientSecure.h>
 #include <PubSubClient.h>
 #include <HTTPClient.h>
 
@@ -15,11 +16,11 @@
 
 // ===== Divisor de tensão no pino do pH =====
 // O PH-4502C alimentado em 5 V pode entregar até 5 V no Po, mas o ADC do ESP32
-// só lê até ~3,1 V (acima disso a leitura trava em 4095 e o pH fica fixo).
-// Com divisor 10k (Po -> pino) + 20k (pino -> GND), o pino recebe 2/3 da tensão.
-// Sem divisor: 1.0  |  Com divisor 10k/20k: 1.5
-#define FATOR_DIVISOR 1.0
-#define ADC_SATURADO 4090
+// só lê até ~3,1 V (acima disso a leitura trava no máximo e o pH fica fixo).
+// Divisor: Po -> R1 -> GPIO35 -> R2 -> GND.  FATOR = (R1 + R2) / R2
+// Sem divisor: 1.0  |  10k/10k: 2.0  |  10k/20k: 1.5
+#define FATOR_DIVISOR 2.0
+#define MV_SATURADO 3100   // acima disso o ADC do ESP32 não mede mais
 
 // ===== Atuador =====
 // LED embutido da placa ESP32 DevKit (GPIO 2). Não exige nenhuma ligação nova
@@ -39,12 +40,13 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 // ===== MQTT =====
 const char* mqtt_server     = "test.mosquitto.org";
-const int   mqtt_port       = 1883;
+// 1883 é bloqueada nesta rede; 8883 = MQTT com TLS (mesma porta do servidor)
+const int   mqtt_port       = 8883;
 // Prefixo único para não colidir com outras equipes no broker público
 const char* topico_ph       = "sistema/aquario/ph";        // ESP32 PUBLICA a leitura
 const char* topico_atuador  = "sistema/aquario/atuador";   // ESP32 ASSINA o comando
 
-WiFiClient espClient;
+WiFiClientSecure espClient;
 PubSubClient client(espClient);
 
 // ===== Calibração do pH =====
@@ -253,6 +255,7 @@ void setup()
   conectarWiFi();
 
   randomSeed(micros());
+  espClient.setInsecure();   // broker público de teste: criptografa sem validar certificado
   client.setServer(mqtt_server, mqtt_port);
   client.setCallback(aoReceberMensagem);
 
@@ -263,7 +266,9 @@ float lerTensaoFiltrada()
 {
   for (int i = 0; i < NUM_SAMPLES; i++)
   {
-    buffer_arr[i] = analogRead(PH_PIN);
+    // analogReadMilliVolts usa a calibração de fábrica do ESP32 (mais preciso
+    // que analogRead * 3.3 / 4095, que não é linear)
+    buffer_arr[i] = analogReadMilliVolts(PH_PIN);
     delay(20);
   }
 
@@ -284,15 +289,15 @@ float lerTensaoFiltrada()
   for (int i = inicio; i < fim; i++)
     soma += buffer_arr[i];
 
-  float leituraMedia = (float)soma / qtd;
-  adcSaturado = leituraMedia >= ADC_SATURADO;
+  float mvMedio = (float)soma / qtd;
+  adcSaturado = mvMedio >= MV_SATURADO;
 
-  Serial.print("ADC: ");
-  Serial.print(leituraMedia, 0);
-  Serial.print("   |   ");
+  Serial.print("Pino: ");
+  Serial.print(mvMedio, 0);
+  Serial.print(" mV   |   ");
 
   // Tensão no pino convertida de volta para a tensão real do Po do módulo
-  return (leituraMedia * 3.3) / 4095.0 * FATOR_DIVISOR;
+  return mvMedio / 1000.0 * FATOR_DIVISOR;
 }
 
 void publicarMQTT(float tensao, float ph)

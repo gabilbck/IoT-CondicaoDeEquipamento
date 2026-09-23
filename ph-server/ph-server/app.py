@@ -1,6 +1,7 @@
 import json
 import os
 import ssl
+import uuid
 from collections import deque
 from contextlib import asynccontextmanager
 from datetime import datetime
@@ -78,7 +79,9 @@ def ao_receber(client, userdata, msg):
         print(f"[{estado['atualizado_em']}] pH={ph:.2f} -> comando {comando} em {TOPICO_ATUADOR}")
 
 
-mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id=f"ph-server-{os.getpid()}")
+# ID aleatório: no Docker o PID é sempre 1, e dois servidores com o mesmo ID no
+# broker público ficam derrubando um ao outro.
+mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id=f"ph-server-{uuid.uuid4().hex[:8]}")
 mqtt_client.on_connect = ao_conectar
 mqtt_client.on_disconnect = ao_desconectar
 mqtt_client.on_message = ao_receber
