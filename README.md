@@ -1,6 +1,3 @@
-
-
-Readme · MD
 # IoT-CondicaoDeEquipamento
  
 # Condição de Equipamento — Monitor de pH com ESP32 + MQTT
