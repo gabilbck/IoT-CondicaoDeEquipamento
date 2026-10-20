@@ -2,7 +2,7 @@
 
 | Identificação | |
 |---|---|
-| **Equipe** | Gabrieli Eduarda Lembeck · Heloisa Rebello Cabral · Julio Bezerra de Mattos Manoel · Mileine da Silva de Freitas · Thomas Henry Steinback |
+| **Equipe** | Aquário Inteligente |
 | **Projeto (N1 → N3)** | Monitor de pH com ESP32 + MQTT → Aquário Inteligente: monitoramento e correção automática de pH e temperatura |
 | **Integrantes presentes** | Gabrieli Eduarda Lembeck · Heloisa Rebello Cabral · Julio Bezerra de Mattos Manoel · Mileine da Silva de Freitas · Thomas Henry Steinback |
 | **Data / Versão** | 20/10/2026 — v1.0 (entrega parcial: seções 1 a 4) |
