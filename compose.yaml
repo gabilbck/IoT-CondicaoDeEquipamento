@@ -1,0 +1,61 @@
+# Aquário Inteligente — sobe tudo com: docker compose up -d   (R12)
+# Antes da 1ª vez:  cp .env.example .env (e preencha) → ./infra/gerar_certificados.sh → ./infra/gerar_senhas.sh
+name: aquario
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2.0.20
+    restart: unless-stopped
+    ports:
+      - "8883:8883"            # MQTT com TLS (única porta exposta do broker)
+    volumes:
+      - ./infra/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - ./infra/mosquitto/acl:/mosquitto/config/acl:ro
+      - ./infra/mosquitto/passwd:/mosquitto/config/passwd:ro
+      - ./infra/certs:/mosquitto/certs:ro
+      - mosquitto-dados:/mosquitto/data
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-aquario}
+      POSTGRES_USER: ${POSTGRES_USER:-aquario}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD no .env}
+    volumes:
+      - postgres-dados:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mosquitto:
+        condition: service_started
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-aquario}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-aquario}
+      MQTT_HOST: mosquitto
+      MQTT_PORT: 8883
+      MQTT_TLS: 1
+      MQTT_CA: /certs/ca.crt
+      FIRMWARE_DIR: /data/firmware
+    volumes:
+      - ./infra/certs/ca.crt:/certs/ca.crt:ro
+      - firmware:/data/firmware
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://localhost:8000/api/saude')"]
+      interval: 15s
+      retries: 5
+
+volumes:
+  mosquitto-dados:
+  postgres-dados:
+  firmware:

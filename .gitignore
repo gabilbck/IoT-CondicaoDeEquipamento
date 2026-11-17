@@ -1,7 +1,16 @@
-# Credenciais locais do firmware
-codigo/secrets.h
+# Segredos
+.env
+**/secrets.h
+infra/certs/*
+!infra/certs/.gitkeep
+infra/mosquitto/passwd
 
 # Python
 __pycache__/
 *.pyc
-.env
+.pytest_cache/
+*.db
+
+# Arduino
+build/
+*.bin

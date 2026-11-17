@@ -1,0 +1,20 @@
+# ACL por usuário (ver CONTRATOS.md §3). Só o backend publica em .../cmd.
+
+user backend
+topic read aquario/v1/#
+topic write aquario/v1/+/cmd
+
+user sonda-01
+topic write aquario/v1/sonda-01/telemetria
+topic write aquario/v1/sonda-01/estado
+topic write aquario/v1/sonda-01/ack
+topic readwrite aquario/v1/sonda-01/status
+topic read aquario/v1/sonda-01/cmd
+
+user ctrl-01
+topic write aquario/v1/ctrl-01/estado
+topic write aquario/v1/ctrl-01/ack
+topic readwrite aquario/v1/ctrl-01/status
+topic read aquario/v1/ctrl-01/cmd
+topic read aquario/v1/sonda-01/telemetria
+topic read aquario/v1/sonda-01/status
