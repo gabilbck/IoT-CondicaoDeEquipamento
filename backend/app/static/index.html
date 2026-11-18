@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aquário Inteligente</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <!-- Painel -->
+  <section id="tela-painel">
+    <header class="topo">
+      <div class="marca"><span class="logo">🐟</span> Aquário Inteligente</div>
+      <div class="topo-dir">
+        <span id="broker" class="selo">broker ?</span>
+      </div>
+    </header>
+
+    <main>
+      <section id="alertas-ativos" class="alertas"></section>
+
+      <section class="grade">
+        <article class="cartao valor">
+          <h3>pH</h3>
+          <div class="grande" id="v-ph">—</div>
+          <div class="pequeno" id="v-ph-info"></div>
+        </article>
+        <article class="cartao valor">
+          <h3>Temperatura</h3>
+          <div class="grande" id="v-temp">—</div>
+          <div class="pequeno" id="v-temp-info"></div>
+        </article>
+        <article class="cartao">
+          <h3>Sonda <code>sonda-01</code> <span id="on-sonda" class="selo">?</span></h3>
+          <dl id="d-sonda"></dl>
+          <div class="acoes admin">
+            <button data-cmd='{"device_id":"sonda-01","acao":"silenciar","params":{"duracao_s":600}}'>Silenciar buzzer 10 min</button>
+          </div>
+        </article>
+        <article class="cartao">
+          <h3>Controlador <code>ctrl-01</code> <span id="on-ctrl" class="selo">?</span></h3>
+          <dl id="d-ctrl"></dl>
+        </article>
+      </section>
+
+      <section class="cartao admin">
+        <h3>Comandos</h3>
+        <div class="acoes">
+          <span class="rotulo">Modo:</span>
+          <button data-cmd='{"device_id":"ctrl-01","acao":"modo","params":{"modo":"AUTO"}}'>AUTO</button>
+          <button data-cmd='{"device_id":"ctrl-01","acao":"modo","params":{"modo":"MANUAL"}}'>MANUAL</button>
+          <button class="perigo" data-cmd='{"device_id":"ctrl-01","acao":"modo","params":{"modo":"SEGURO"}}'>SEGURO</button>
+        </div>
+        <div class="acoes">
+          <span class="rotulo">Dosar 1 s:</span>
+          <button data-cmd='{"device_id":"ctrl-01","acao":"dosar","params":{"alvo":"bomba_ph_mais","duracao_ms":1000}}'>pH+</button>
+          <button data-cmd='{"device_id":"ctrl-01","acao":"dosar","params":{"alvo":"bomba_ph_menos","duracao_ms":1000}}'>pH−</button>
+        </div>
+        <div class="acoes">
+          <span class="rotulo">Aquecedor:</span>
+          <button data-cmd='{"device_id":"ctrl-01","acao":"aquecedor","params":{"estado":"ON"}}'>Liberar</button>
+          <button data-cmd='{"device_id":"ctrl-01","acao":"aquecedor","params":{"estado":"OFF"}}'>Bloquear</button>
+          <span class="rotulo">Cooler:</span>
+          <button data-cmd='{"device_id":"ctrl-01","acao":"cooler","params":{"estado":"ON"}}'>Ligar</button>
+          <button data-cmd='{"device_id":"ctrl-01","acao":"cooler","params":{"estado":"OFF"}}'>Desligar</button>
+        </div>
+        <p id="msg-cmd" class="pequeno"></p>
+      </section>
+
+      <section class="cartao">
+        <div class="titulo-linha">
+          <h3>Histórico e indicadores</h3>
+          <select id="periodo"><option value="24h">Últimas 24 h</option><option value="7d">Últimos 7 dias</option></select>
+        </div>
+        <div class="indicadores" id="indicadores"></div>
+        <div class="graficos">
+          <div><canvas id="g-ph"></canvas></div>
+          <div><canvas id="g-temp"></canvas></div>
+          <div><canvas id="g-doses"></canvas></div>
+        </div>
+      </section>
+
+      <section class="cartao">
+        <h3>Últimos comandos</h3>
+        <div class="tabela-rolagem">
+          <table>
+            <thead><tr><th>Enviado</th><th>Disp.</th><th>Ação</th><th>Parâmetros</th><th>Origem</th><th>Estado</th><th></th></tr></thead>
+            <tbody id="t-comandos"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="cartao admin">
+        <h3>Faixas e regras (backend)</h3>
+        <form id="form-config" class="config"></form>
+        <p id="msg-config" class="pequeno"></p>
+      </section>
+
+      <section class="cartao">
+        <h3>Histórico de alertas</h3>
+        <div class="tabela-rolagem">
+          <table>
+            <thead><tr><th>Quando</th><th>Tipo</th><th>Mensagem</th><th>Resolvido</th></tr></thead>
+            <tbody id="t-alertas"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </section>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
