@@ -616,7 +616,10 @@ void setup() {
   ds.setWaitForConversion(false);
 
   Wire.begin(I2C_SDA, I2C_SCL);
-  oledOk = display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+  // display.begin() devolve true mesmo sem OLED ligado: confirma antes se o 0x3C responde no I2C
+  Wire.beginTransmission(0x3C);
+  bool oledPresente = Wire.endTransmission() == 0;
+  oledOk = oledPresente && display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
   if (!oledOk) Serial.println("[OLED] nao encontrado (segue sem display)");
 
   snprintf(tTelemetria, sizeof tTelemetria, "aquario/v1/%s/telemetria", DEVICE_ID);

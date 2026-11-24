@@ -4,13 +4,16 @@
 # Saída em infra/certs/: ca.crt (vai também para o firmware, em secrets.h), ca.key (NÃO versionar),
 # server.crt, server.key.
 set -euo pipefail
+# Git Bash (Windows): não converter "/CN=..." em caminho do Windows ("C:/Program Files/Git/CN=...")
+export MSYS_NO_PATHCONV=1
 cd "$(dirname "$0")/.."
 if [ -f .env ]; then set -a; . ./.env; set +a; fi
 HOST="${MQTT_PUBLIC_HOST:-localhost}"
 DIR=infra/certs
 mkdir -p "$DIR"
 
-if [ ! -f "$DIR/ca.key" ]; then
+# recria a CA se faltar a chave OU o certificado (ex.: execução anterior interrompida)
+if [ ! -f "$DIR/ca.key" ] || [ ! -f "$DIR/ca.crt" ]; then
   openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=Aquario Inteligente CA" \
     -keyout "$DIR/ca.key" -out "$DIR/ca.crt"
   echo "CA criada em $DIR/ca.crt (validade 10 anos)"

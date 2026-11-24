@@ -4,111 +4,216 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Aquário Inteligente</title>
-  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/style.css?v=2">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
-  <!-- Painel -->
-  <section id="tela-painel">
-    <header class="topo">
-      <div class="marca"><span class="logo">🐟</span> Aquário Inteligente</div>
-      <div class="topo-dir">
-        <span id="broker" class="selo">broker ?</span>
-      </div>
-    </header>
+  <header class="topo">
+    <div class="marca"><span class="logo">🐟</span> Aquário Inteligente</div>
+    <div class="topo-dir">
+      <span id="broker" class="selo" title="Broker MQTT (Mosquitto): é por ele que o servidor conversa com as placas. Se estiver indisponível, nenhuma leitura chega e nenhum comando sai.">broker ?</span>
+    </div>
+  </header>
 
-    <main>
-      <section id="alertas-ativos" class="alertas"></section>
+  <main>
+    <!-- Alertas ativos -->
+    <section id="alertas-ativos" class="alertas"></section>
 
-      <section class="grade">
-        <article class="cartao valor">
-          <h3>pH</h3>
+    <!-- Ajuda geral -->
+    <details class="cartao ajuda-geral">
+      <summary>ℹ️ Como ler esta tela</summary>
+      <ul>
+        <li><b>pH</b> e <b>Temperatura</b> têm um painel cada: valor atual, faixa ideal, gráfico, comandos e regras daquela grandeza.</li>
+        <li>Existem <b>duas faixas</b> diferentes:
+          <ul>
+            <li><b>Faixa ideal</b> (servidor): usada para decidir correções automáticas e para os alertas no painel/WhatsApp.</li>
+            <li><b>Faixa crítica</b> (sonda): mais larga; quando a leitura sai dela, o <b>buzzer</b> da sonda apita, mesmo sem internet.</li>
+          </ul>
+        </li>
+        <li><b>Dispositivos</b>: a <b>Sonda</b> (sonda-01) mede; o <b>Controlador</b> (ctrl-01) aciona bombas, aquecedor e cooler. Comandos para um dispositivo <b>offline</b> não chegam e ficam como <b>expirado</b>.</li>
+        <li>Passe o mouse sobre os ícones <span class="i">i</span> para ver a explicação de cada campo.</li>
+      </ul>
+    </details>
+
+    <div class="barra-periodo">
+      <label for="periodo">Período dos gráficos e indicadores</label>
+      <select id="periodo"><option value="24h">Últimas 24 h</option><option value="7d">Últimos 7 dias</option></select>
+    </div>
+
+    <!-- Painéis por grandeza -->
+    <section class="grandezas">
+      <!-- ================= pH ================= -->
+      <article class="cartao grandeza ph">
+        <h2>🧪 pH da água</h2>
+
+        <div class="atual" id="atual-ph">
           <div class="grande" id="v-ph">—</div>
-          <div class="pequeno" id="v-ph-info"></div>
-        </article>
-        <article class="cartao valor">
-          <h3>Temperatura</h3>
+          <span class="selo" id="st-ph">—</span>
+        </div>
+        <dl class="info">
+          <dt>Faixa ideal <span class="i" title="Faixa em que o pH deve ficar. Fora dela, o servidor pode dosar pH+ ou pH− (modo AUTO) e gera alerta se durar muito. Ajuste em “Regras de pH”.">i</span></dt>
+          <dd id="ph-faixa">—</dd>
+          <dt>Faixa crítica (buzzer) <span class="i" title="Limite de segurança gravado na própria sonda. Fora dele o buzzer apita, mesmo sem rede. Ajuste em “Ajustes da sonda”.">i</span></dt>
+          <dd id="ph-crit">—</dd>
+          <dt>Tensão do sensor <span class="i" title="Tensão de saída do módulo PH-4502C. É o valor usado na calibração (pH 7 ≈ 2,5 V).">i</span></dt>
+          <dd id="ph-tensao">—</dd>
+          <dt>Última leitura</dt>
+          <dd id="ph-quando">—</dd>
+          <dt>Tempo fora da faixa <span class="i" title="Percentual do período escolhido em que o pH ficou fora da faixa ideal.">i</span></dt>
+          <dd id="ph-pct">—</dd>
+          <dt>Doses hoje <span class="i" title="Quantas vezes as bombas de pH+ e pH− foram acionadas hoje (pelo usuário ou pelas regras).">i</span></dt>
+          <dd id="ph-doses">—</dd>
+        </dl>
+
+        <div class="grafico"><canvas id="g-ph"></canvas></div>
+        <p class="legenda">Linha contínua = leitura · tracejada = média móvel de 30 min · linhas vermelhas = faixa ideal.</p>
+
+        <h3>Correção manual <span class="i" title="Envia o comando ao Controlador. Só funciona com o Controlador online e fora do modo SEGURO.">i</span></h3>
+        <div class="acoes">
+          <button data-cmd='{"device_id":"ctrl-01","acao":"dosar","params":{"alvo":"bomba_ph_mais","duracao_ms":1000}}'
+                  title="Liga a bomba de pH+ por 1 segundo: sobe o pH.">Dosar pH+ (1 s)</button>
+          <button data-cmd='{"device_id":"ctrl-01","acao":"dosar","params":{"alvo":"bomba_ph_menos","duracao_ms":1000}}'
+                  title="Liga a bomba de pH− por 1 segundo: baixa o pH.">Dosar pH− (1 s)</button>
+        </div>
+
+        <div class="grafico baixo"><canvas id="g-doses"></canvas></div>
+
+        <details class="regras">
+          <summary>⚙️ Regras de pH (servidor)</summary>
+          <form class="config" data-chaves="ph_min,ph_max,janela_media_ph_s,leituras_minimas_media,dose_ms,intervalo_min_doses_s,doses_max_hora,descartar_ph_apos_dose_s"></form>
+        </details>
+      </article>
+
+      <!-- ============== Temperatura ============== -->
+      <article class="cartao grandeza temp">
+        <h2>🌡️ Temperatura da água</h2>
+
+        <div class="atual" id="atual-temp">
           <div class="grande" id="v-temp">—</div>
-          <div class="pequeno" id="v-temp-info"></div>
-        </article>
-        <article class="cartao">
-          <h3>Sonda <code>sonda-01</code> <span id="on-sonda" class="selo">?</span></h3>
-          <dl id="d-sonda"></dl>
-          <div class="acoes admin">
-            <button data-cmd='{"device_id":"sonda-01","acao":"silenciar","params":{"duracao_s":600}}'>Silenciar buzzer 10 min</button>
+          <span class="selo" id="st-temp">—</span>
+        </div>
+        <dl class="info">
+          <dt>Faixa ideal <span class="i" title="Faixa em que a temperatura deve ficar. Abaixo dela o servidor libera o aquecedor; acima, liga o cooler (modo AUTO). Ajuste em “Regras de temperatura”.">i</span></dt>
+          <dd id="temp-faixa">—</dd>
+          <dt>Faixa crítica (buzzer) <span class="i" title="Limite de segurança gravado na própria sonda. Fora dele o buzzer apita, mesmo sem rede. Ajuste em “Ajustes da sonda”.">i</span></dt>
+          <dd id="temp-crit">—</dd>
+          <dt>Aquecedor <span class="i" title="“Liberado” = o aquecedor funciona pelo próprio termostato. “Bloqueado” = o relé corta a energia dele.">i</span></dt>
+          <dd id="temp-aquec">—</dd>
+          <dt>Cooler</dt>
+          <dd id="temp-cooler">—</dd>
+          <dt>Última leitura</dt>
+          <dd id="temp-quando">—</dd>
+          <dt>Tempo fora da faixa <span class="i" title="Percentual do período escolhido em que a temperatura ficou fora da faixa ideal.">i</span></dt>
+          <dd id="temp-pct">—</dd>
+        </dl>
+
+        <div class="grafico"><canvas id="g-temp"></canvas></div>
+        <p class="legenda">Linha contínua = leitura · tracejada = média móvel de 30 min · linhas vermelhas = faixa ideal.</p>
+
+        <h3>Correção manual <span class="i" title="Envia o comando ao Controlador. Só funciona com o Controlador online e fora do modo SEGURO.">i</span></h3>
+        <div class="acoes">
+          <span class="rotulo">Aquecedor</span>
+          <button data-cmd='{"device_id":"ctrl-01","acao":"aquecedor","params":{"estado":"ON"}}' title="Deixa o aquecedor funcionar pelo próprio termostato.">Liberar</button>
+          <button data-cmd='{"device_id":"ctrl-01","acao":"aquecedor","params":{"estado":"OFF"}}' title="Corta a energia do aquecedor.">Bloquear</button>
+        </div>
+        <div class="acoes">
+          <span class="rotulo">Cooler</span>
+          <button data-cmd='{"device_id":"ctrl-01","acao":"cooler","params":{"estado":"ON"}}' title="Liga a ventilação para resfriar a água.">Ligar</button>
+          <button data-cmd='{"device_id":"ctrl-01","acao":"cooler","params":{"estado":"OFF"}}' title="Desliga a ventilação.">Desligar</button>
+        </div>
+
+        <details class="regras">
+          <summary>⚙️ Regras de temperatura (servidor)</summary>
+          <form class="config" data-chaves="temp_min,temp_max,histerese_temp"></form>
+        </details>
+      </article>
+    </section>
+    <p id="msg-cmd" class="mensagem"></p>
+
+    <!-- Dispositivos -->
+    <section class="grade-disp">
+      <article class="cartao">
+        <h3>📡 Sonda <code>sonda-01</code> <span id="on-sonda" class="selo">?</span></h3>
+        <p class="descricao">Placa que mede pH e temperatura, mostra no display e apita o buzzer em situação crítica.</p>
+        <dl id="d-sonda"></dl>
+        <div class="acoes">
+          <button data-cmd='{"device_id":"sonda-01","acao":"silenciar","params":{"duracao_s":600}}'
+                  title="Cala o buzzer por 10 minutos. O alerta continua aparecendo no display e no painel.">🔇 Silenciar buzzer 10 min</button>
+        </div>
+
+        <details class="regras">
+          <summary>⚙️ Ajustes da sonda (faixa crítica e calibração)</summary>
+          <p class="pequeno">Estes valores ficam gravados <b>na própria sonda</b> e valem mesmo sem rede. Só é possível enviar com a sonda online.</p>
+          <form id="form-sonda" class="config">
+            <label>pH crítico mínimo <small>Abaixo disso o buzzer apita.</small><input type="number" step="any" name="ph_crit_min" min="0" max="14"></label>
+            <label>pH crítico máximo <small>Acima disso o buzzer apita.</small><input type="number" step="any" name="ph_crit_max" min="0" max="14"></label>
+            <label>Temp. crítica mínima (°C) <small>Abaixo disso o buzzer apita.</small><input type="number" step="any" name="temp_crit_min" min="0" max="45"></label>
+            <label>Temp. crítica máxima (°C) <small>Acima disso o buzzer apita.</small><input type="number" step="any" name="temp_crit_max" min="0" max="45"></label>
+            <label>Calibração: inclinação (ph_slope) <small>pH = inclinação × tensão + deslocamento.</small><input type="number" step="any" name="ph_slope" min="-20" max="20"></label>
+            <label>Calibração: deslocamento (ph_offset) <small>Calculado junto com a inclinação.</small><input type="number" step="any" name="ph_offset" min="-50" max="50"></label>
+            <button type="submit">Enviar para a sonda</button>
+          </form>
+          <div class="calculadora">
+            <b>Calculadora de calibração</b>
+            <p class="pequeno">Meça a <b>tensão do sensor</b> (painel de pH) em duas soluções de pH conhecido, espere 2 min em cada, e preencha:</p>
+            <div class="config">
+              <label>pH da solução 1<input type="number" step="any" id="cal-p1" value="7"></label>
+              <label>Tensão na solução 1 (V)<input type="number" step="any" id="cal-v1"></label>
+              <label>pH da solução 2<input type="number" step="any" id="cal-p2" value="4"></label>
+              <label>Tensão na solução 2 (V)<input type="number" step="any" id="cal-v2"></label>
+              <button type="button" id="cal-calcular" class="secundario">Calcular e preencher acima</button>
+            </div>
+            <p id="cal-msg" class="pequeno"></p>
           </div>
-        </article>
-        <article class="cartao">
-          <h3>Controlador <code>ctrl-01</code> <span id="on-ctrl" class="selo">?</span></h3>
-          <dl id="d-ctrl"></dl>
-        </article>
-      </section>
+          <p id="msg-sonda" class="pequeno"></p>
+        </details>
+      </article>
 
-      <section class="cartao admin">
-        <h3>Comandos</h3>
+      <article class="cartao">
+        <h3>⚙️ Controlador <code>ctrl-01</code> <span id="on-ctrl" class="selo">?</span></h3>
+        <p class="descricao">Placa que aciona as bombas de pH, o aquecedor e o cooler, seguindo os comandos do servidor e as travas de segurança.</p>
+        <dl id="d-ctrl"></dl>
+        <h3>Modo de operação <span class="i" title="AUTO: o servidor corrige pH e temperatura sozinho. MANUAL: só os botões do painel (volta para AUTO após 10 min sem comandos). SEGURO: tudo desligado, aquecedor só no termostato. Para sair do SEGURO, use AUTO.">i</span></h3>
         <div class="acoes">
-          <span class="rotulo">Modo:</span>
-          <button data-cmd='{"device_id":"ctrl-01","acao":"modo","params":{"modo":"AUTO"}}'>AUTO</button>
-          <button data-cmd='{"device_id":"ctrl-01","acao":"modo","params":{"modo":"MANUAL"}}'>MANUAL</button>
-          <button class="perigo" data-cmd='{"device_id":"ctrl-01","acao":"modo","params":{"modo":"SEGURO"}}'>SEGURO</button>
+          <button data-cmd='{"device_id":"ctrl-01","acao":"modo","params":{"modo":"AUTO"}}' title="O servidor corrige pH e temperatura automaticamente.">AUTO</button>
+          <button data-cmd='{"device_id":"ctrl-01","acao":"modo","params":{"modo":"MANUAL"}}' title="Só os comandos manuais. Volta sozinho para AUTO após 10 min sem comandos.">MANUAL</button>
+          <button class="perigo" data-cmd='{"device_id":"ctrl-01","acao":"modo","params":{"modo":"SEGURO"}}' title="Desliga bombas e cooler; aquecedor fica só no termostato. Use em emergência.">SEGURO</button>
         </div>
-        <div class="acoes">
-          <span class="rotulo">Dosar 1 s:</span>
-          <button data-cmd='{"device_id":"ctrl-01","acao":"dosar","params":{"alvo":"bomba_ph_mais","duracao_ms":1000}}'>pH+</button>
-          <button data-cmd='{"device_id":"ctrl-01","acao":"dosar","params":{"alvo":"bomba_ph_menos","duracao_ms":1000}}'>pH−</button>
-        </div>
-        <div class="acoes">
-          <span class="rotulo">Aquecedor:</span>
-          <button data-cmd='{"device_id":"ctrl-01","acao":"aquecedor","params":{"estado":"ON"}}'>Liberar</button>
-          <button data-cmd='{"device_id":"ctrl-01","acao":"aquecedor","params":{"estado":"OFF"}}'>Bloquear</button>
-          <span class="rotulo">Cooler:</span>
-          <button data-cmd='{"device_id":"ctrl-01","acao":"cooler","params":{"estado":"ON"}}'>Ligar</button>
-          <button data-cmd='{"device_id":"ctrl-01","acao":"cooler","params":{"estado":"OFF"}}'>Desligar</button>
-        </div>
-        <p id="msg-cmd" class="pequeno"></p>
-      </section>
+      </article>
+    </section>
 
-      <section class="cartao">
-        <div class="titulo-linha">
-          <h3>Histórico e indicadores</h3>
-          <select id="periodo"><option value="24h">Últimas 24 h</option><option value="7d">Últimos 7 dias</option></select>
-        </div>
-        <div class="indicadores" id="indicadores"></div>
-        <div class="graficos">
-          <div><canvas id="g-ph"></canvas></div>
-          <div><canvas id="g-temp"></canvas></div>
-          <div><canvas id="g-doses"></canvas></div>
-        </div>
-      </section>
+    <!-- Comandos -->
+    <section class="cartao">
+      <h3>📋 Últimos comandos</h3>
+      <p class="descricao">Cada comando passa por etapas até ser confirmado pela placa:
+        <span class="st-enviado">enviado</span> → <span class="st-recebido">recebido</span> → <span class="st-executado">executado</span> → <span class="st-confirmado">confirmado</span>.
+        Se der errado: <span class="st-rejeitado">rejeitado</span> (a placa recusou, ex.: trava de segurança),
+        <span class="st-falhou">falhou</span> (tentou e não conseguiu) ou <span class="st-expirado">expirado</span> (a placa não respondeu a tempo, normalmente porque está offline).</p>
+      <div class="tabela-rolagem">
+        <table>
+          <thead><tr><th>Enviado</th><th>Dispositivo</th><th>Ação</th><th>Detalhe</th><th>Quem enviou</th><th>Situação</th><th></th></tr></thead>
+          <tbody id="t-comandos"></tbody>
+        </table>
+      </div>
+    </section>
 
-      <section class="cartao">
-        <h3>Últimos comandos</h3>
-        <div class="tabela-rolagem">
-          <table>
-            <thead><tr><th>Enviado</th><th>Disp.</th><th>Ação</th><th>Parâmetros</th><th>Origem</th><th>Estado</th><th></th></tr></thead>
-            <tbody id="t-comandos"></tbody>
-          </table>
-        </div>
-      </section>
+    <!-- Alertas e configurações gerais -->
+    <section class="cartao">
+      <h3>🔔 Histórico de alertas</h3>
+      <p class="descricao">Alertas gerados pelo servidor. Também são enviados por WhatsApp, se estiver configurado.</p>
+      <div class="tabela-rolagem">
+        <table>
+          <thead><tr><th>Quando</th><th>Tipo</th><th>Mensagem</th><th>Resolvido</th></tr></thead>
+          <tbody id="t-alertas"></tbody>
+        </table>
+      </div>
+      <details class="regras">
+        <summary>⚙️ Regras de alertas e comandos (servidor)</summary>
+        <form class="config" data-chaves="alerta_fora_faixa_min,offline_alerta_min,alerta_intervalo_min,comando_expira_s"></form>
+      </details>
+    </section>
+  </main>
 
-      <section class="cartao admin">
-        <h3>Faixas e regras (backend)</h3>
-        <form id="form-config" class="config"></form>
-        <p id="msg-config" class="pequeno"></p>
-      </section>
-
-      <section class="cartao">
-        <h3>Histórico de alertas</h3>
-        <div class="tabela-rolagem">
-          <table>
-            <thead><tr><th>Quando</th><th>Tipo</th><th>Mensagem</th><th>Resolvido</th></tr></thead>
-            <tbody id="t-alertas"></tbody>
-          </table>
-        </div>
-      </section>
-    </main>
-  </section>
-
-  <script src="/static/app.js"></script>
+  <script src="/static/app.js?v=2"></script>
 </body>
 </html>

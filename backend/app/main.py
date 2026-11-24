@@ -70,6 +70,16 @@ async def ciclo_de_vida(app: FastAPI):
 app = FastAPI(title="Aquário Inteligente — backend", version="1.0.0", lifespan=ciclo_de_vida)
 
 
+@app.middleware("http")
+async def interface_sem_cache(request, call_next):
+    """A interface (página e /static) é revalidada a cada acesso: depois de atualizar os arquivos,
+    o navegador nunca mistura HTML novo com CSS/JS antigos guardados em cache."""
+    resposta = await call_next(request)
+    if request.url.path == "/" or request.url.path.startswith("/static/"):
+        resposta.headers["Cache-Control"] = "no-cache"
+    return resposta
+
+
 # ---------------------------------------------------------------------------
 # Serialização
 # ---------------------------------------------------------------------------
