@@ -1,0 +1,28 @@
+16:04:10.624 > ets Jul 29 2019 12:21:46
+16:04:10.624 > 
+16:04:10.624 > rst:0x1 (POWERON_RESET),boot:0x17 (SPI_FAST_FLASH_BOOT)
+16:04:10.624 > configsip: 0, SPIWP:0xee
+16:04:10.624 > clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+16:04:10.624 > mode:DIO, clock div:2
+16:04:10.624 > load:0x3fff0030,len:4660
+16:04:10.624 > load:0x40078000,len:15556
+16:04:10.624 > load:0x40080400,len:4
+16:04:10.624 >   #0  0x40080400 in _init at ??:?
+16:04:10.624 > 
+16:04:10.624 > ho 8 tail 4 room 4
+16:04:10.624 > load:0x40080404,len:3152
+16:04:10.624 > entry 0x400805a0
+16:04:10.625 > [    37][E][esp32-hal-gpio.c:176] __digitalWrite(): IO 25 is not set as GPIO. Execute digitalMode(25, OUTPUT) first.
+16:04:10.625 > 
+16:04:10.625 > === Aquario Inteligente - sonda-01 fw 1.0.0 ===
+16:04:10.625 > [    51][E][Preferences.cpp:47] begin(): nvs_open failed: NOT_FOUND
+16:04:10.625 > [NVS] config v0: pH crit 6.0-8.0, temp crit 22.0-30.0, slope -5.700 offset 21.340
+16:04:10.625 > [    68][E][esp32-hal-adc.c:172] __analogChannelConfig(): Pin is not configured as analog channel
+16:04:10.625 > [OLED] nao encontrado (segue sem display)
+16:04:10.625 > [Regra] NORMAL -> ALERTA_LOCAL
+16:04:14.620 > [WiFi] tentando conectar...
+16:04:14.621 > E (20917) wifi:sta is connecting, return error
+16:04:14.625 > [ 10306][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+16:04:24.621 > [WiFi] tentando conectar...
+16:04:24.623 > E (30918) wifi:sta is connecting, return error
+16:04:24.627 > [ 20307][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN

@@ -148,3 +148,17 @@ td.vazio { color: var(--suave); text-align: center; padding: 14px; }
 
 html { -webkit-text-size-adjust: 100%; }
 img, canvas { max-width: 100%; }
+
+/* ---------- botão do estado atual (modo do controlador, aquecedor, cooler) ---------- */
+button[aria-pressed="false"] { opacity: .75; }
+button.ativo { opacity: 1; font-weight: 700; color: #fff; box-shadow: 0 0 0 2px var(--cartao), 0 0 0 4px rgba(127,127,127,.55); }
+button.ativo::before { content: "✓ "; }
+button.ativo[data-tom="ok"] { background: var(--ok); }
+button.ativo[data-tom="aviso"] { background: var(--aviso); }
+button.ativo[data-tom="perigo"] { background: var(--critico); }
+
+/* mensagem do envio dos ajustes da sonda */
+.envio { margin: 8px 0 0; font-size: .9rem; font-weight: 600; min-height: 1.2em; }
+.envio.ok { color: var(--ok); }
+.envio.aviso { color: var(--aviso); }
+.envio.erro { color: var(--critico); }

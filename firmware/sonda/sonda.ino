@@ -559,37 +559,99 @@ void cuidarDoBuzzer() {
   digitalWrite(PIN_BUZZER, (millis() % 1000) < 200 ? HIGH : LOW);  // bipe intermitente
 }
 
+// Situação de uma leitura em relação à faixa crítica, em palavras curtas para o display
+const char* situacaoLeitura(bool temLeitura, bool valido, float v, float lo, float hi) {
+  if (!temLeitura) return "lendo...";
+  if (!valido) return "FALHA";
+  if (v < lo) return "BAIXO";
+  if (v > hi) return "ALTO";
+  return "ok";
+}
+
+// Tela (128x64):
+//   Aquario                online      <- conexão em palavras: online / sem servidor / sem WiFi
+//   ---------------------------------
+//   pH                Temp.
+//   7.16              24.5 °C         <- valores grandes; piscam quando estão fora da faixa crítica
+//   ok                ok              <- ok / BAIXO / ALTO / FALHA / lendo...
+//   ---------------------------------
+//   Tudo normal                       <- ou faixa invertida: "ALERTA: temp alta", "Alarme mudo: 9 min", "Verifique o sensor"
 void cuidarDoOled() {
   static unsigned long ultimo = 0;
   if (!oledOk || millis() - ultimo < 500) return;
   ultimo = millis();
+  bool pisca = (millis() / 500) % 2;
   display.clearDisplay();
   display.setTextColor(SSD1306_WHITE);
   display.setTextSize(1);
+
+  // Linha 1: nome e conexão
   display.setCursor(0, 0);
-  display.print(DEVICE_ID);
-  display.print(WiFi.status() == WL_CONNECTED ? " W" : " -");
-  display.print(mqtt.connected() ? " M" : " -");
-  display.print(horaValida() ? " T" : " -");
+  display.print("Aquario");
+  const char* rede = WiFi.status() != WL_CONNECTED ? "sem WiFi" : !mqtt.connected() ? "sem servidor" : "online";
+  display.setCursor(128 - strlen(rede) * 6, 0);
+  display.print(rede);
   display.drawLine(0, 10, 127, 10, SSD1306_WHITE);
 
+  bool temPh = !isnan(ph), temTemp = ultimaTemp != 0;
   bool alerta = estadoLocal == ALERTA_LOCAL;
   bool phFora = phValido && (ph < cfg.ph_crit_min || ph > cfg.ph_crit_max);
   bool tFora = tempValido && (temp < cfg.temp_crit_min || temp > cfg.temp_crit_max);
 
+  // Colunas: pH à esquerda, temperatura à direita
+  display.setCursor(0, 13);
+  display.print("pH");
+  display.setCursor(66, 13);
+  display.print("Temp.");
+
   display.setTextSize(2);
-  display.setCursor(0, 14);
-  if (alerta && phFora && (millis() / 500) % 2) display.setTextColor(SSD1306_BLACK, SSD1306_WHITE);
-  if (phValido) { display.print("pH "); display.print(ph, 2); } else display.print("pH ERRO");
+  display.setCursor(0, 23);
+  if (alerta && phFora && pisca) display.setTextColor(SSD1306_BLACK, SSD1306_WHITE);
+  if (phValido) display.print(ph, 2); else display.print("--");
   display.setTextColor(SSD1306_WHITE);
-  display.setCursor(0, 34);
-  if (alerta && tFora && (millis() / 500) % 2) display.setTextColor(SSD1306_BLACK, SSD1306_WHITE);
-  if (tempValido) { display.print(temp, 1); display.print(" C"); } else display.print("T ERRO");
+
+  display.setCursor(66, 23);
+  if (alerta && tFora && pisca) display.setTextColor(SSD1306_BLACK, SSD1306_WHITE);
+  if (tempValido) display.print(temp, 1); else display.print("--");
   display.setTextColor(SSD1306_WHITE);
+  if (tempValido) {
+    int x = display.getCursorX();
+    display.drawCircle(x + 3, 25, 2, SSD1306_WHITE);  // símbolo de grau
+    display.setTextSize(1);
+    display.setCursor(x + 7, 23);
+    display.print("C");
+  }
+
   display.setTextSize(1);
-  display.setCursor(0, 55);
-  display.print(nomeEstado(estadoLocal));
-  if (silenciadoRestante()) display.print(" (mudo)");
+  display.setCursor(0, 42);
+  display.print(situacaoLeitura(temPh, phValido, ph, cfg.ph_crit_min, cfg.ph_crit_max));
+  display.setCursor(66, 42);
+  display.print(situacaoLeitura(temTemp, tempValido, temp, cfg.temp_crit_min, cfg.temp_crit_max));
+
+  // Rodapé: o que está acontecendo, em palavras (faixa invertida quando pede atenção)
+  char msg[22];
+  bool destaque = true;
+  if (estadoLocal == FALHA_SENSOR) {
+    snprintf(msg, sizeof msg, "Verifique o sensor");
+  } else if (alerta && silenciadoRestante()) {
+    snprintf(msg, sizeof msg, "Alarme mudo: %d min", (silenciadoRestante() + 59) / 60);
+  } else if (alerta) {
+    const char* motivo = phFora ? (ph < cfg.ph_crit_min ? "pH baixo" : "pH alto")
+                                : (tFora ? (temp < cfg.temp_crit_min ? "temp baixa" : "temp alta") : "voltando");
+    snprintf(msg, sizeof msg, "ALERTA: %s", motivo);
+  } else {
+    snprintf(msg, sizeof msg, "Tudo normal");
+    destaque = false;
+  }
+  if (destaque) {
+    display.fillRect(0, 53, 128, 11, SSD1306_WHITE);
+    display.setTextColor(SSD1306_BLACK);
+  } else {
+    display.drawLine(0, 52, 127, 52, SSD1306_WHITE);
+  }
+  display.setCursor(2, 55);
+  display.print(msg);
+  display.setTextColor(SSD1306_WHITE);
   display.display();
 }
 
@@ -616,11 +678,26 @@ void setup() {
   ds.setWaitForConversion(false);
 
   Wire.begin(I2C_SDA, I2C_SCL);
-  // display.begin() devolve true mesmo sem OLED ligado: confirma antes se o 0x3C responde no I2C
-  Wire.beginTransmission(0x3C);
-  bool oledPresente = Wire.endTransmission() == 0;
-  oledOk = oledPresente && display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
-  if (!oledOk) Serial.println("[OLED] nao encontrado (segue sem display)");
+  // display.begin() devolve true mesmo sem OLED ligado: confirma antes quem responde no I2C
+  // (0x3C é o padrão; alguns módulos vêm em 0x3D)
+  uint8_t enderecoOled = 0;
+  for (uint8_t a : {0x3C, 0x3D}) {
+    Wire.beginTransmission(a);
+    if (Wire.endTransmission() == 0) { enderecoOled = a; break; }
+  }
+  oledOk = enderecoOled && display.begin(SSD1306_SWITCHCAPVCC, enderecoOled);
+  if (oledOk) {
+    Serial.printf("[OLED] encontrado em 0x%02X\n", enderecoOled);
+  } else {
+    // diagnóstico: lista tudo o que responde no barramento (SDA=GPIO21, SCL=GPIO22)
+    Serial.print("[OLED] nao encontrado (segue sem display). Dispositivos I2C:");
+    int achados = 0;
+    for (uint8_t a = 1; a < 127; a++) {
+      Wire.beginTransmission(a);
+      if (Wire.endTransmission() == 0) { Serial.printf(" 0x%02X", a); achados++; }
+    }
+    Serial.println(achados ? "" : " nenhum (confira VCC, GND, SDA e SCL)");
+  }
 
   snprintf(tTelemetria, sizeof tTelemetria, "aquario/v1/%s/telemetria", DEVICE_ID);
   snprintf(tEstado, sizeof tEstado, "aquario/v1/%s/estado", DEVICE_ID);

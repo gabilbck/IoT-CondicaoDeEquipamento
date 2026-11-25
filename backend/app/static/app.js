@@ -146,6 +146,7 @@ async function atualizarRapido() {
       ["Disponibilidade", $("#d-ctrl").dataset.uptime || "—", "Percentual do período escolhido em que o controlador ficou online."],
     ]);
     preencherSonda(scfg);
+    marcarBotoesAtivos(c.online, ce.modo, at);
 
     // Alertas ativos
     $("#alertas-ativos").innerHTML = ativos.map((a) =>
@@ -159,6 +160,25 @@ async function atualizarRapido() {
       <td><button class="secundario" data-reenviar="${c.command_id}" title="Reenvia exatamente o mesmo comando (mesmo identificador). Serve para o teste de duplicidade: a placa deve recusar com E_DUPLICADO.">↻</button></td>
     </tr>`).join("") : `<tr><td colspan="7" class="vazio">Nenhum comando ainda.</td></tr>`;
   } catch (err) { console.error(err); }
+}
+
+// ---------------- botões que mostram o estado atual ----------------
+// Destaca o botão que corresponde ao que o controlador está fazendo agora:
+// modo AUTO (verde), MANUAL (laranja) ou SEGURO (vermelho); aquecedor liberado/bloqueado; cooler ligado/desligado.
+// Com o controlador offline, nenhum fica destacado (o estado real é desconhecido).
+const TOM_MODO = { AUTO: "ok", MANUAL: "aviso", SEGURO: "perigo" };
+function marcarBotoesAtivos(online, modo, atuadores) {
+  for (const b of $$("button[data-cmd]")) {
+    const cmd = JSON.parse(b.dataset.cmd);
+    let ativo;
+    if (cmd.device_id !== "ctrl-01") continue;
+    if (cmd.acao === "modo") { ativo = modo === cmd.params.modo; b.dataset.tom = TOM_MODO[cmd.params.modo]; }
+    else if (cmd.acao === "aquecedor" || cmd.acao === "cooler") { ativo = atuadores[cmd.acao] === cmd.params.estado; b.dataset.tom = "ok"; }
+    else continue;
+    ativo = Boolean(online && ativo);
+    b.classList.toggle("ativo", ativo);
+    b.setAttribute("aria-pressed", String(ativo));
+  }
 }
 
 // ---------------- comandos ----------------
@@ -210,8 +230,17 @@ for (const form of $$("form[data-chaves]")) {
 
 // ---------------- ajustes da sonda (comando config) ----------------
 let sondaEditando = false;
+// Valores enviados que a sonda ainda não informou de volta no estado (evita o formulário "voltar" ao valor antigo)
+let sondaPendente = null;
+function msgSonda(texto, tom) { const m = $("#msg-sonda"); m.textContent = texto; m.className = "envio" + (tom ? " " + tom : ""); }
 $("#form-sonda").addEventListener("input", () => (sondaEditando = true));
 function preencherSonda(scfg) {
+  if (sondaPendente) {
+    const aplicado = Object.entries(sondaPendente.params).every(([k, v]) => scfg[k] != null && Math.abs(scfg[k] - v) < 0.001);
+    if (!aplicado && Date.now() - sondaPendente.desde < 15000) return; // mantém o que foi enviado até a sonda confirmar
+    msgSonda(aplicado ? "✓ A sonda confirmou e já está usando os valores novos." : "✗ A sonda não confirmou em 15 s (offline?). Veja o motivo em “Últimos comandos”.", aplicado ? "ok" : "erro");
+    sondaPendente = null; // aplicado, ou passou o prazo (aí mostra o valor real da sonda)
+  }
   if (sondaEditando) return; // não sobrescreve o que a pessoa está digitando
   for (const k of ["ph_crit_min", "ph_crit_max", "temp_crit_min", "temp_crit_max", "ph_slope", "ph_offset"]) {
     const el = $(`#form-sonda [name=${k}]`);
@@ -221,12 +250,17 @@ function preencherSonda(scfg) {
 $("#form-sonda").addEventListener("submit", async (e) => {
   e.preventDefault();
   const params = Object.fromEntries([...new FormData(e.target)].filter(([, v]) => v !== "").map(([k, v]) => [k, Number(v)]));
+  const botao = e.target.querySelector("button[type=submit]");
+  botao.disabled = true;
+  msgSonda("Enviando…");
   try {
     await api("/api/comandos", { method: "POST", body: JSON.stringify({ device_id: "sonda-01", acao: "config", params }) });
-    $("#msg-sonda").textContent = "Enviado. Confira em “Últimos comandos”: quando ficar “confirmado”, a sonda já está usando os valores novos.";
+    msgSonda("✓ Enviado. Aguardando a sonda confirmar…", "aviso");
+    sondaPendente = { params, desde: Date.now() };
     sondaEditando = false;
     atualizarRapido();
-  } catch (err) { $("#msg-sonda").textContent = "Erro: " + err.message; }
+  } catch (err) { msgSonda("✗ Erro ao enviar: " + err.message, "erro"); }
+  finally { botao.disabled = false; }
 });
 $("#cal-calcular").addEventListener("click", () => {
   const p1 = Number($("#cal-p1").value), v1 = Number($("#cal-v1").value);

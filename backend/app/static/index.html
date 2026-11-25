@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Aquário Inteligente</title>
-  <link rel="stylesheet" href="/static/style.css?v=2">
+  <link rel="stylesheet" href="/static/style.css?v=3">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
@@ -153,6 +153,7 @@
             <label>Calibração: deslocamento (ph_offset) <small>Calculado junto com a inclinação.</small><input type="number" step="any" name="ph_offset" min="-50" max="50"></label>
             <button type="submit">Enviar para a sonda</button>
           </form>
+          <p id="msg-sonda" class="envio" aria-live="polite"></p>
           <div class="calculadora">
             <b>Calculadora de calibração</b>
             <p class="pequeno">Meça a <b>tensão do sensor</b> (painel de pH) em duas soluções de pH conhecido, espere 2 min em cada, e preencha:</p>
@@ -165,7 +166,6 @@
             </div>
             <p id="cal-msg" class="pequeno"></p>
           </div>
-          <p id="msg-sonda" class="pequeno"></p>
         </details>
       </article>
 
@@ -214,6 +214,6 @@
     </section>
   </main>
 
-  <script src="/static/app.js?v=2"></script>
+  <script src="/static/app.js?v=3"></script>
 </body>
 </html>
