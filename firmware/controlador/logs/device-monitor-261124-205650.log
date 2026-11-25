@@ -1,0 +1,415 @@
+20:56:50.713 > T),boot:0x13 (SPI_FAST_FLASH_BOOT)
+20:56:50.713 > configsip: 0, SPIWP:0xee
+20:56:50.713 > clk_drv:0x00,q_drv:[    36][E][esp32-hal-gpio.c:176] __digitalWrite(): IO 25 is not set as GPIO. Execute digitalMode(25, OUTPUT) first.
+20:56:51.144 > [    47][E][esp32-hal-gpio.c:176] __digitalWrite(): IO 26 is not set as GPIO. Execute digitalMode(26, OUTPUT) first.
+20:56:51.163 > [    60][E][esp32-hal-gpio.c:176] __digitalWrite(): IO 32 is not set as GPIO. Execute digitalMode(32, OUTPUT) first.
+20:56:51.163 > [    72][E][esp32-hal-gpio.c:176] __digitalWrite(): IO 33 is not set as GPIO. Execute digitalMode(33, OUTPUT) first.
+20:56:51.196 > 
+20:56:51.196 > === Aquario Inteligente - ctrl-01 fw 1.0.0 ===
+20:56:51.196 > [    88][E][Preferences.cpp:47] begin(): nvs_open failed: NOT_FOUND
+20:56:51.196 > [NVS] config v0 valida
+20:56:52.506 > [WiFi] conectado, IP 172.20.10.10
+20:56:56.083 > [MQTT] conectando com TLS... ok
+20:56:56.525 > [MQTT] -> aquario/v1/ctrl-01/status {"v":1,"deviceId":"ctrl-01","ts":"2026-11-24T23:56:53Z","ts_sync":true,"status":"online","fw":"1.0.0"}
+20:56:56.554 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-24T23:56:53Z","ts_sync":true,"modo":"BOOT","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"ON","cooler":"OFF"},"nivel":"OK","ultimo_command_id":null,"fw":"1.0.0","config_versao":0,"rssi_dbm":-70,"uptime_s":5,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+20:56:57.027 > [Modo] BOOT -> AUTO
+20:56:57.032 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-24T23:56:53Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"ON","cooler":"OFF"},"nivel":"OK","ultimo_command_id":null,"fw":"1.0.0","config_versao":0,"rssi_dbm":-68,"uptime_s":5,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+20:56:58.895 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-24T23:56:55Z","ts_sync":true,"commandId":"694df5c9-7667-4b83-ab96-8ee9078946fc","fase":"recebido","resultado":"ok","codigo":null}
+20:56:58.918 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-24T23:56:55Z","ts_sync":true,"commandId":"694df5c9-7667-4b83-ab96-8ee9078946fc","fase":"executado","resultado":"ok","codigo":null}
+20:56:58.940 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-24T23:56:55Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"694df5c9-7667-4b83-ab96-8ee9078946fc","fw":"1.0.0","config_versao":0,"rssi_dbm":-70,"uptime_s":7,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+20:57:58.971 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-24T23:57:55Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"694df5c9-7667-4b83-ab96-8ee9078946fc","fw":"1.0.0","config_versao":0,"rssi_dbm":-62,"uptime_s":67,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+20:58:14.343 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-24T23:58:11Z","ts_sync":true,"commandId":"4ffa5ada-426f-40e5-8907-6d971399a31e","fase":"recebido","resultado":"ok","codigo":null}
+20:58:14.363 > [Modo] AUTO -> MANUAL
+20:58:14.363 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-24T23:58:11Z","ts_sync":true,"commandId":"4ffa5ada-426f-40e5-8907-6d971399a31e","fase":"executado","resultado":"ok","codigo":null}
+20:58:14.383 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-24T23:58:11Z","ts_sync":true,"modo":"MANUAL","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"4ffa5ada-426f-40e5-8907-6d971399a31e","fw":"1.0.0","config_versao":0,"rssi_dbm":-63,"uptime_s":83,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+20:58:17.745 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-24T23:58:14Z","ts_sync":true,"commandId":"d8946f42-27af-4bf7-994a-049fe46eb820","fase":"recebido","resultado":"ok","codigo":null}
+20:58:17.763 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-24T23:58:14Z","ts_sync":true,"commandId":"d8946f42-27af-4bf7-994a-049fe46eb820","fase":"executado","resultado":"ok","codigo":null}
+20:58:17.784 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-24T23:58:14Z","ts_sync":true,"modo":"MANUAL","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"ON"},"nivel":"OK","ultimo_command_id":"d8946f42-27af-4bf7-994a-049fe46eb820","fw":"1.0.0","config_versao":0,"rssi_dbm":-64,"uptime_s":86,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+20:58:24.799 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-24T23:58:21Z","ts_sync":true,"commandId":"a7ef5698-daef-454f-b30e-1106cfa38ba7","fase":"recebido","resultado":"ok","codigo":null}
+20:58:24.818 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-24T23:58:21Z","ts_sync":true,"commandId":"a7ef5698-daef-454f-b30e-1106cfa38ba7","fase":"executado","resultado":"ok","codigo":null}
+20:58:24.838 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-24T23:58:21Z","ts_sync":true,"modo":"MANUAL","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"a7ef5698-daef-454f-b30e-1106cfa38ba7","fw":"1.0.0","config_versao":0,"rssi_dbm":-64,"uptime_s":93,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+20:58:27.656 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-24T23:58:24Z","ts_sync":true,"commandId":"4d8acaa7-7dda-486e-a912-1b3e14efe3be","fase":"recebido","resultado":"ok","codigo":null}
+20:58:27.675 > [Modo] MANUAL -> AUTO
+20:58:27.676 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-24T23:58:24Z","ts_sync":true,"commandId":"4d8acaa7-7dda-486e-a912-1b3e14efe3be","fase":"executado","resultado":"ok","codigo":null}
+20:58:27.702 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-24T23:58:24Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"4d8acaa7-7dda-486e-a912-1b3e14efe3be","fw":"1.0.0","config_versao":0,"rssi_dbm":-63,"uptime_s":96,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+20:59:27.731 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-24T23:59:24Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"4d8acaa7-7dda-486e-a912-1b3e14efe3be","fw":"1.0.0","config_versao":0,"rssi_dbm":-71,"uptime_s":156,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:00:27.768 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:00:24Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"4d8acaa7-7dda-486e-a912-1b3e14efe3be","fw":"1.0.0","config_versao":0,"rssi_dbm":-73,"uptime_s":216,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:01:27.806 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:01:24Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"4d8acaa7-7dda-486e-a912-1b3e14efe3be","fw":"1.0.0","config_versao":0,"rssi_dbm":-67,"uptime_s":276,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:02:27.842 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:02:24Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"4d8acaa7-7dda-486e-a912-1b3e14efe3be","fw":"1.0.0","config_versao":0,"rssi_dbm":-68,"uptime_s":336,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:03:27.880 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:03:24Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"4d8acaa7-7dda-486e-a912-1b3e14efe3be","fw":"1.0.0","config_versao":0,"rssi_dbm":-63,"uptime_s":396,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:04:27.916 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:04:24Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"4d8acaa7-7dda-486e-a912-1b3e14efe3be","fw":"1.0.0","config_versao":0,"rssi_dbm":-64,"uptime_s":456,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:05:27.957 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:05:24Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"4d8acaa7-7dda-486e-a912-1b3e14efe3be","fw":"1.0.0","config_versao":0,"rssi_dbm":-68,"uptime_s":516,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:06:27.989 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:06:24Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"4d8acaa7-7dda-486e-a912-1b3e14efe3be","fw":"1.0.0","config_versao":0,"rssi_dbm":-66,"uptime_s":576,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:07:28.024 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:07:24Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"4d8acaa7-7dda-486e-a912-1b3e14efe3be","fw":"1.0.0","config_versao":0,"rssi_dbm":-64,"uptime_s":636,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:07:57.125 > [666033][E][ssl_client.cpp:36] _handle_error(): [data_to_read():405]: (-76) UNKNOWN ERROR CODE (004C)
+21:07:57.135 > [666042][E][NetworkClientSecure.cpp:309] available(): Closing connection on failed available check
+21:07:57.144 > [WiFi] tentando conectar...
+21:07:57.148 > E (670256) wifi:sta is connecting, return error
+21:07:57.152 > [666054][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:08:07.144 > [WiFi] tentando conectar...
+21:08:07.147 > E (680256) wifi:sta is connecting, return error
+21:08:07.165 > [676054][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:08:17.076 > [Modo] AUTO -> SEGURO (causa: rede)
+21:08:18.125 > [WiFi] tentando conectar...
+21:08:18.125 > E (690258) wifi:sta is connecting, return error
+21:08:18.125 > [686056][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:08:27.147 > [WiFi] tentando conectar...
+21:08:27.149 > E (700259) wifi:sta is connecting, return error
+21:08:27.154 > [696056][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:08:37.148 > [WiFi] tentando conectar...
+21:08:37.151 > E (710259) wifi:sta is connecting, return error
+21:08:37.155 > [706057][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:08:47.149 > [WiFi] tentando conectar...
+21:08:47.155 > E (720261) wifi:sta is connecting, return error
+21:08:47.157 > [716058][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:08:57.150 > [WiFi] tentando conectar...
+21:08:57.155 > E (730262) wifi:sta is connecting, return error
+21:08:57.163 > [726059][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:09:07.155 > [WiFi] tentando conectar...
+21:09:07.478 > E (740263) wifi:sta is connecting, return error
+21:09:07.478 > [736060][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:09:17.152 > [WiFi] tentando conectar...
+21:09:17.156 > E (750264) wifi:sta is connecting, return error
+21:09:17.160 > [746061][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:09:27.153 > [WiFi] tentando conectar...
+21:09:27.157 > E (760264) wifi:sta is connecting, return error
+21:09:27.162 > [756062][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:09:37.153 > [WiFi] tentando conectar...
+21:09:37.160 > E (770265) wifi:sta is connecting, return error
+21:09:37.165 > [766063][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:09:47.148 > [WiFi] tentando conectar...
+21:09:47.170 > E (780267) wifi:sta is connecting, return error
+21:09:47.177 > [776064][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:09:57.152 > [WiFi] tentando conectar...
+21:09:57.159 > E (790268) wifi:sta is connecting, return error
+21:09:57.159 > [786065][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:10:07.159 > [WiFi] tentando conectar...
+21:10:07.162 > E (800269) wifi:sta is connecting, return error
+21:10:07.167 > [796067][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:10:17.159 > [WiFi] tentando conectar...
+21:10:17.162 > E (810270) wifi:sta is connecting, return error
+21:10:17.166 > [806067][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:10:27.159 > [WiFi] tentando conectar...
+21:10:27.159 > E (820271) wifi:sta is connecting, return error
+21:10:27.168 > [816068][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:10:37.162 > [WiFi] tentando conectar...
+21:10:37.166 > E (830272) wifi:sta is connecting, return error
+21:10:37.169 > [826069][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:10:47.163 > [WiFi] tentando conectar...
+21:10:47.166 > E (840273) wifi:sta is connecting, return error
+21:10:47.170 > [836071][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:10:57.164 > [WiFi] tentando conectar...
+21:10:57.168 > E (850274) wifi:sta is connecting, return error
+21:10:57.172 > [846071][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:11:07.165 > [WiFi] tentando conectar...
+21:11:07.172 > E (860275) wifi:sta is connecting, return error
+21:11:07.174 > [856072][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:11:17.166 > [WiFi] tentando conectar...
+21:11:17.169 > E (870276) wifi:sta is connecting, return error
+21:11:17.174 > [866073][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:11:27.167 > [WiFi] tentando conectar...
+21:11:27.171 > E (880277) wifi:sta is connecting, return error
+21:11:27.176 > [876074][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:11:37.168 > [WiFi] tentando conectar...
+21:11:37.171 > E (890278) wifi:sta is connecting, return error
+21:11:37.175 > [886075][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:11:47.172 > [WiFi] tentando conectar...
+21:11:47.173 > E (900279) wifi:sta is connecting, return error
+21:11:47.177 > [896076][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:11:57.171 > [WiFi] tentando conectar...
+21:11:57.174 > E (910279) wifi:sta is connecting, return error
+21:11:57.178 > [906077][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:12:07.173 > [WiFi] tentando conectar...
+21:12:07.176 > E (920281) wifi:sta is connecting, return error
+21:12:07.181 > [916079][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:12:17.173 > [WiFi] tentando conectar...
+21:12:17.182 > E (930282) wifi:sta is connecting, return error
+21:12:17.182 > [926079][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:12:27.184 > [WiFi] tentando conectar...
+21:12:27.304 > E (940282) wifi:sta is connecting, return error
+21:12:27.304 > [936080][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:12:37.177 > [WiFi] tentando conectar...
+21:12:37.183 > E (950284) wifi:sta is connecting, return error
+21:12:37.186 > [946082][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:12:47.177 > [WiFi] tentando conectar...
+21:12:47.180 > E (960285) wifi:sta is connecting, return error
+21:12:47.185 > [956083][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:12:57.178 > [WiFi] tentando conectar...
+21:12:57.181 > E (970285) wifi:sta is connecting, return error
+21:12:57.186 > [966083][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:13:07.179 > [WiFi] tentando conectar...
+21:13:07.182 > E (980286) wifi:sta is connecting, return error
+21:13:07.186 > [976084][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:13:17.180 > [WiFi] tentando conectar...
+21:13:17.195 > E (990288) wifi:sta is connecting, return error
+21:13:17.195 > [986085][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:13:27.181 > [WiFi] tentando conectar...
+21:13:27.185 > E (1000288) wifi:sta is connecting, return error
+21:13:27.188 > [996086][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:13:37.183 > [WiFi] tentando conectar...
+21:13:37.200 > E (1010290) wifi:sta is connecting, return error
+21:13:37.200 > [1006088][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:13:47.183 > [WiFi] tentando conectar...
+21:13:47.186 > E (1020291) wifi:sta is connecting, return error
+21:13:47.190 > [1016088][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:13:57.185 > [WiFi] tentando conectar...
+21:13:57.190 > E (1030292) wifi:sta is connecting, return error
+21:13:57.192 > [1026089][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:14:07.186 > [WiFi] tentando conectar...
+21:14:07.190 > E (1040293) wifi:sta is connecting, return error
+21:14:07.195 > [1036091][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:14:17.187 > [WiFi] tentando conectar...
+21:14:17.192 > E (1050293) wifi:sta is connecting, return error
+21:14:17.352 > [1046091][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:14:27.188 > [WiFi] tentando conectar...
+21:14:27.192 > E (1060295) wifi:sta is connecting, return error
+21:14:27.217 > [1056092][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:14:37.189 > [WiFi] tentando conectar...
+21:14:37.192 > E (1070296) wifi:sta is connecting, return error
+21:14:37.200 > [1066093][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:14:47.191 > [WiFi] tentando conectar...
+21:14:47.193 > E (1080296) wifi:sta is connecting, return error
+21:14:47.198 > [1076094][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:14:57.191 > [WiFi] tentando conectar...
+21:14:57.195 > E (1090297) wifi:sta is connecting, return error
+21:14:57.199 > [1086095][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:15:07.192 > [WiFi] tentando conectar...
+21:15:07.196 > E (1100299) wifi:sta is connecting, return error
+21:15:07.200 > [1096096][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:15:17.196 > [WiFi] tentando conectar...
+21:15:17.199 > E (1110300) wifi:sta is connecting, return error
+21:15:17.203 > [1106097][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:15:27.195 > [WiFi] tentando conectar...
+21:15:27.198 > E (1120301) wifi:sta is connecting, return error
+21:15:27.202 > [1116098][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:15:37.196 > [WiFi] tentando conectar...
+21:15:37.199 > E (1130302) wifi:sta is connecting, return error
+21:15:37.204 > [1126099][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:15:47.198 > [WiFi] tentando conectar...
+21:15:47.201 > E (1140303) wifi:sta is connecting, return error
+21:15:47.205 > [1136101][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:15:57.200 > [WiFi] tentando conectar...
+21:15:57.209 > E (1150304) wifi:sta is connecting, return error
+21:15:57.209 > [1146101][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:16:07.199 > [WiFi] tentando conectar...
+21:16:07.203 > E (1160305) wifi:sta is connecting, return error
+21:16:07.207 > [1156103][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:16:17.200 > [WiFi] tentando conectar...
+21:16:17.203 > E (1170306) wifi:sta is connecting, return error
+21:16:17.207 > [1166103][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:16:27.202 > [WiFi] tentando conectar...
+21:16:27.210 > E (1180307) wifi:sta is connecting, return error
+21:16:27.210 > [1176104][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:16:37.203 > [WiFi] tentando conectar...
+21:16:37.206 > E (1190308) wifi:sta is connecting, return error
+21:16:37.210 > [1186106][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:16:47.204 > [WiFi] tentando conectar...
+21:16:47.207 > E (1200308) wifi:sta is connecting, return error
+21:16:47.211 > [1196106][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:16:57.205 > [WiFi] tentando conectar...
+21:16:57.208 > E (1210310) wifi:sta is connecting, return error
+21:16:57.212 > [1206107][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:17:07.206 > [WiFi] tentando conectar...
+21:17:07.208 > E (1220311) wifi:sta is connecting, return error
+21:17:07.214 > [1216108][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:17:17.208 > [WiFi] tentando conectar...
+21:17:17.211 > E (1230312) wifi:sta is connecting, return error
+21:17:17.215 > [1226109][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:17:27.209 > [WiFi] tentando conectar...
+21:17:27.219 > E (1240313) wifi:sta is connecting, return error
+21:17:27.219 > [1236110][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:17:37.209 > [WiFi] tentando conectar...
+21:17:37.213 > E (1250314) wifi:sta is connecting, return error
+21:17:37.217 > [1246112][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:17:47.211 > [WiFi] tentando conectar...
+21:17:47.214 > E (1260315) wifi:sta is connecting, return error
+21:17:47.218 > [1256112][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:17:57.212 > [WiFi] tentando conectar...
+21:17:57.215 > E (1270316) wifi:sta is connecting, return error
+21:17:57.221 > [1266114][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:18:07.212 > [WiFi] tentando conectar...
+21:18:07.216 > E (1280317) wifi:sta is connecting, return error
+21:18:07.220 > [1276114][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:18:17.214 > [WiFi] tentando conectar...
+21:18:17.221 > E (1290317) wifi:sta is connecting, return error
+21:18:17.224 > [1286115][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:18:27.216 > [WiFi] tentando conectar...
+21:18:28.365 > E (1300319) wifi:sta is connecting, return error
+21:18:28.365 > [1296117][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:18:37.216 > [WiFi] tentando conectar...
+21:18:37.220 > E (1310320) wifi:sta is connecting, return error
+21:18:37.224 > [1306117][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:18:47.217 > [WiFi] tentando conectar...
+21:18:47.220 > E (1320320) wifi:sta is connecting, return error
+21:18:47.224 > [1316118][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:18:57.218 > [WiFi] tentando conectar...
+21:18:57.222 > E (1330322) wifi:sta is connecting, return error
+21:18:57.226 > [1326119][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:19:07.219 > [WiFi] tentando conectar...
+21:19:07.223 > E (1340323) wifi:sta is connecting, return error
+21:19:07.227 > [1336120][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:19:17.221 > [WiFi] tentando conectar...
+21:19:17.224 > E (1350324) wifi:sta is connecting, return error
+21:19:17.229 > [1346122][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:19:27.222 > [WiFi] tentando conectar...
+21:19:27.225 > E (1360325) wifi:sta is connecting, return error
+21:19:27.230 > [1356122][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:19:37.224 > [WiFi] tentando conectar...
+21:19:37.226 > E (1370326) wifi:sta is connecting, return error
+21:19:37.231 > [1366124][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:19:47.224 > [WiFi] tentando conectar...
+21:19:47.227 > E (1380327) wifi:sta is connecting, return error
+21:19:47.231 > [1376124][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:19:57.225 > [WiFi] tentando conectar...
+21:19:57.228 > E (1390327) wifi:sta is connecting, return error
+21:19:57.233 > [1386125][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:20:07.227 > [WiFi] tentando conectar...
+21:20:07.231 > E (1400329) wifi:sta is connecting, return error
+21:20:07.235 > [1396126][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:20:17.228 > [WiFi] tentando conectar...
+21:20:17.232 > E (1410330) wifi:sta is connecting, return error
+21:20:17.237 > [1406127][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:20:27.230 > [WiFi] tentando conectar...
+21:20:27.233 > E (1420331) wifi:sta is connecting, return error
+21:20:27.237 > [1416129][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:20:37.226 > [WiFi] tentando conectar...
+21:20:37.235 > E (1430332) wifi:sta is connecting, return error
+21:20:37.237 > [1426129][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:20:47.231 > [WiFi] tentando conectar...
+21:20:47.234 > E (1440332) wifi:sta is connecting, return error
+21:20:47.238 > [1436130][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:20:57.228 > [WiFi] tentando conectar...
+21:20:57.228 > E (1450334) wifi:sta is connecting, return error
+21:20:57.236 > [1446131][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:21:07.231 > [WiFi] tentando conectar...
+21:21:07.231 > E (1460335) wifi:sta is connecting, return error
+21:21:07.240 > [1456132][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:21:17.235 > [WiFi] tentando conectar...
+21:21:17.238 > E (1470336) wifi:sta is connecting, return error
+21:21:17.242 > [1466133][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:21:27.236 > [WiFi] tentando conectar...
+21:21:27.240 > E (1480337) wifi:sta is connecting, return error
+21:21:27.240 > [1476134][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:21:37.237 > [WiFi] tentando conectar...
+21:21:37.241 > E (1490338) wifi:sta is connecting, return error
+21:21:37.245 > [1486135][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:21:47.236 > [WiFi] tentando conectar...
+21:21:47.241 > E (1500339) wifi:sta is connecting, return error
+21:21:47.241 > [1496136][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:21:57.239 > [WiFi] tentando conectar...
+21:21:57.242 > E (1510341) wifi:sta is connecting, return error
+21:21:57.247 > [1506138][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:22:07.240 > [WiFi] tentando conectar...
+21:22:07.241 > E (1520341) wifi:sta is connecting, return error
+21:22:07.241 > [1516139][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:22:17.241 > [WiFi] tentando conectar...
+21:22:17.244 > E (1530342) wifi:sta is connecting, return error
+21:22:17.248 > [1526139][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:22:27.242 > [WiFi] tentando conectar...
+21:22:27.245 > E (1540343) wifi:sta is connecting, return error
+21:22:27.250 > [1536140][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:22:37.243 > [WiFi] tentando conectar...
+21:22:37.247 > E (1550344) wifi:sta is connecting, return error
+21:22:37.251 > [1546141][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:22:47.243 > [WiFi] tentando conectar...
+21:22:47.243 > E (1560345) wifi:sta is connecting, return error
+21:22:47.250 > [1556143][E][STA.cpp:419] connect(): STA connect failed! 0x3007: ESP_ERR_WIFI_CONN
+21:22:57.245 > [WiFi] tentando conectar...
+21:23:07.247 > [WiFi] tentando conectar...
+21:23:17.250 > [WiFi] tentando conectar...
+21:23:20.993 > ets Jun  8 2016 00:22:57
+21:23:21.001 > 
+21:23:21.001 > rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+21:23:21.001 > configsip: 0, SPIWP:0xee
+21:23:21.003 > clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+21:23:21.010 > mode:DIO, clock div:2
+21:23:21.011 > load:0x3fff0030,len:4660
+21:23:21.425 > load:0x40078000,len:15556
+21:23:23.427 > load:0x40080400,len:4
+21:23:23.427 >   #0  0x40080400 in _init at ??:?
+21:23:23.427 > 
+21:23:23.427 > ho 8 tail 4 room 4
+21:23:23.427 > load:0x40080404,len:3152
+21:23:23.427 > entry 0x400805a0
+21:23:23.434 > [    36][E][esp32-hal-gpio.c:176] __digitalWrite(): IO 25 is not set as GPIO. Execute digitalMode(25, OUTPUT) first.
+21:23:23.434 > [    47][E][esp32-hal-gpio.c:176] __digitalWrite(): IO 26 is not set as GPIO. Execute digitalMode(26, OUTPUT) first.
+21:23:23.434 > [    60][E][esp32-hal-gpio.c:176] __digitalWrite(): IO 32 is not set as GPIO. Execute digitalMode(32, OUTPUT) first.
+21:23:23.434 > [    72][E][esp32-hal-gpio.c:176] __digitalWrite(): IO 33 is not set as GPIO. Execute digitalMode(33, OUTPUT) first.
+21:23:23.434 > 
+21:23:23.434 > === Aquario Inteligente - ctrl-01 fw 1.0.0 ===
+21:23:23.434 > [    88][E][Preferences.cpp:47] begin(): nvs_open failed: NOT_FOUND
+21:23:23.434 > [NVS] config v0 valida
+21:23:23.827 > [WiFi] conectado, IP 172.20.10.10
+21:23:28.104 > [MQTT] conectando com TLS... ok
+21:23:28.841 > [MQTT] -> aquario/v1/ctrl-01/status {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:23:25Z","ts_sync":true,"status":"online","fw":"1.0.0"}
+21:23:28.860 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:23:25Z","ts_sync":true,"modo":"BOOT","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"ON","cooler":"OFF"},"nivel":"OK","ultimo_command_id":null,"fw":"1.0.0","config_versao":0,"rssi_dbm":-56,"uptime_s":7,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:23:29.848 > [Modo] BOOT -> AUTO
+21:23:29.856 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:23:26Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"ON","cooler":"OFF"},"nivel":"OK","ultimo_command_id":null,"fw":"1.0.0","config_versao":0,"rssi_dbm":-71,"uptime_s":8,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:23:32.131 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:23:28Z","ts_sync":true,"commandId":"cc046695-4eeb-4d61-81d9-9aad294133ee","fase":"recebido","resultado":"ok","codigo":null}
+21:23:32.152 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:23:28Z","ts_sync":true,"commandId":"cc046695-4eeb-4d61-81d9-9aad294133ee","fase":"executado","resultado":"ok","codigo":null}
+21:23:32.171 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:23:28Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"cc046695-4eeb-4d61-81d9-9aad294133ee","fw":"1.0.0","config_versao":0,"rssi_dbm":-64,"uptime_s":10,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:24:32.206 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:24:28Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"cc046695-4eeb-4d61-81d9-9aad294133ee","fw":"1.0.0","config_versao":0,"rssi_dbm":-63,"uptime_s":70,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:24:50.962 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:24:47Z","ts_sync":true,"commandId":"fcced84e-b317-4f18-8407-b8be4227bfdd","fase":"recebido","resultado":"ok","codigo":null}
+21:24:50.978 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:24:47Z","ts_sync":true,"commandId":"fcced84e-b317-4f18-8407-b8be4227bfdd","fase":"executado","resultado":"ok","codigo":null}
+21:24:51.003 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:24:47Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"ON"},"nivel":"OK","ultimo_command_id":"fcced84e-b317-4f18-8407-b8be4227bfdd","fw":"1.0.0","config_versao":0,"rssi_dbm":-61,"uptime_s":89,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:25:51.028 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:25:47Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"ON"},"nivel":"OK","ultimo_command_id":"fcced84e-b317-4f18-8407-b8be4227bfdd","fw":"1.0.0","config_versao":0,"rssi_dbm":-69,"uptime_s":149,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:26:51.068 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:26:47Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"ON"},"nivel":"OK","ultimo_command_id":"fcced84e-b317-4f18-8407-b8be4227bfdd","fw":"1.0.0","config_versao":0,"rssi_dbm":-58,"uptime_s":209,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:27:51.105 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:27:47Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"ON"},"nivel":"OK","ultimo_command_id":"fcced84e-b317-4f18-8407-b8be4227bfdd","fw":"1.0.0","config_versao":0,"rssi_dbm":-67,"uptime_s":269,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:27:55.706 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:27:52Z","ts_sync":true,"commandId":"51294345-13c3-4a65-bf24-b6714bccd714","fase":"recebido","resultado":"ok","codigo":null}
+21:27:55.725 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:27:52Z","ts_sync":true,"commandId":"51294345-13c3-4a65-bf24-b6714bccd714","fase":"executado","resultado":"ok","codigo":null}
+21:27:55.745 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:27:52Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-64,"uptime_s":274,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:28:55.783 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:28:52Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-66,"uptime_s":334,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:29:55.821 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:29:52Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-66,"uptime_s":394,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:30:55.858 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:30:52Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-54,"uptime_s":454,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:31:55.894 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:31:52Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-54,"uptime_s":514,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:32:55.930 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:32:52Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-64,"uptime_s":574,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:33:55.967 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:33:52Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-64,"uptime_s":634,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:34:56.003 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:34:52Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-58,"uptime_s":694,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:35:56.041 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:35:52Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-64,"uptime_s":754,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:36:56.076 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:36:52Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-70,"uptime_s":814,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:37:56.113 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:37:52Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-59,"uptime_s":874,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:38:56.143 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:38:52Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-59,"uptime_s":934,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:39:56.187 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:39:52Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-56,"uptime_s":994,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:40:56.224 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:40:52Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-59,"uptime_s":1054,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:41:56.262 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:41:52Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-63,"uptime_s":1114,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:42:56.297 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:42:52Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-62,"uptime_s":1174,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:43:56.334 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:43:53Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-58,"uptime_s":1234,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:44:56.371 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:44:53Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-65,"uptime_s":1294,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:45:56.407 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:45:53Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-59,"uptime_s":1354,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:46:56.445 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:46:53Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-56,"uptime_s":1414,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:47:56.480 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:47:53Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-63,"uptime_s":1475,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:48:56.519 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:48:53Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-68,"uptime_s":1535,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:49:56.550 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:49:53Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-64,"uptime_s":1595,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:50:56.594 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:50:53Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"51294345-13c3-4a65-bf24-b6714bccd714","fw":"1.0.0","config_versao":0,"rssi_dbm":-62,"uptime_s":1655,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:51:56.612 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:51:53Z","ts_sync":true,"commandId":"64ec215e-b682-4a48-af4f-c60400576d98","fase":"recebido","resultado":"ok","codigo":null}
+21:51:56.631 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:51:53Z","ts_sync":true,"commandId":"64ec215e-b682-4a48-af4f-c60400576d98","fase":"executado","resultado":"ok","codigo":null}
+21:51:56.650 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:51:53Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"ON"},"nivel":"OK","ultimo_command_id":"64ec215e-b682-4a48-af4f-c60400576d98","fw":"1.0.0","config_versao":0,"rssi_dbm":-75,"uptime_s":1715,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:52:56.689 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:52:53Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"ON"},"nivel":"OK","ultimo_command_id":"64ec215e-b682-4a48-af4f-c60400576d98","fw":"1.0.0","config_versao":0,"rssi_dbm":-62,"uptime_s":1775,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:53:56.726 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:53:53Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"ON"},"nivel":"OK","ultimo_command_id":"64ec215e-b682-4a48-af4f-c60400576d98","fw":"1.0.0","config_versao":0,"rssi_dbm":-66,"uptime_s":1835,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:54:56.762 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:54:53Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"ON"},"nivel":"OK","ultimo_command_id":"64ec215e-b682-4a48-af4f-c60400576d98","fw":"1.0.0","config_versao":0,"rssi_dbm":-68,"uptime_s":1895,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:55:15.663 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:55:12Z","ts_sync":true,"commandId":"06bcbc77-9226-45f0-999f-f3c1882fcd2e","fase":"recebido","resultado":"ok","codigo":null}
+21:55:15.683 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:55:12Z","ts_sync":true,"commandId":"06bcbc77-9226-45f0-999f-f3c1882fcd2e","fase":"executado","resultado":"ok","codigo":null}
+21:55:15.702 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:55:12Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"06bcbc77-9226-45f0-999f-f3c1882fcd2e","fw":"1.0.0","config_versao":0,"rssi_dbm":-71,"uptime_s":1914,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:56:15.740 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:56:12Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"06bcbc77-9226-45f0-999f-f3c1882fcd2e","fw":"1.0.0","config_versao":0,"rssi_dbm":-67,"uptime_s":1974,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:57:15.776 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:57:12Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"06bcbc77-9226-45f0-999f-f3c1882fcd2e","fw":"1.0.0","config_versao":0,"rssi_dbm":-68,"uptime_s":2034,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:58:15.801 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:58:12Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"06bcbc77-9226-45f0-999f-f3c1882fcd2e","fw":"1.0.0","config_versao":0,"rssi_dbm":-67,"uptime_s":2094,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+21:59:15.849 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T00:59:12Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"06bcbc77-9226-45f0-999f-f3c1882fcd2e","fw":"1.0.0","config_versao":0,"rssi_dbm":-79,"uptime_s":2154,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+22:00:15.886 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T01:00:12Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"06bcbc77-9226-45f0-999f-f3c1882fcd2e","fw":"1.0.0","config_versao":0,"rssi_dbm":-68,"uptime_s":2214,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+22:01:15.922 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T01:01:12Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"06bcbc77-9226-45f0-999f-f3c1882fcd2e","fw":"1.0.0","config_versao":0,"rssi_dbm":-68,"uptime_s":2274,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+22:02:15.960 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T01:02:12Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"06bcbc77-9226-45f0-999f-f3c1882fcd2e","fw":"1.0.0","config_versao":0,"rssi_dbm":-67,"uptime_s":2334,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+22:03:15.995 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T01:03:12Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"06bcbc77-9226-45f0-999f-f3c1882fcd2e","fw":"1.0.0","config_versao":0,"rssi_dbm":-81,"uptime_s":2394,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+22:04:16.034 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T01:04:12Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"06bcbc77-9226-45f0-999f-f3c1882fcd2e","fw":"1.0.0","config_versao":0,"rssi_dbm":-73,"uptime_s":2454,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+22:05:16.071 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T01:05:12Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"06bcbc77-9226-45f0-999f-f3c1882fcd2e","fw":"1.0.0","config_versao":0,"rssi_dbm":-56,"uptime_s":2514,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+22:06:16.108 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T01:06:12Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"06bcbc77-9226-45f0-999f-f3c1882fcd2e","fw":"1.0.0","config_versao":0,"rssi_dbm":-71,"uptime_s":2574,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+22:07:16.145 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T01:07:12Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"06bcbc77-9226-45f0-999f-f3c1882fcd2e","fw":"1.0.0","config_versao":0,"rssi_dbm":-61,"uptime_s":2634,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+22:08:16.180 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T01:08:12Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"06bcbc77-9226-45f0-999f-f3c1882fcd2e","fw":"1.0.0","config_versao":0,"rssi_dbm":-66,"uptime_s":2694,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+22:09:16.217 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T01:09:12Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"06bcbc77-9226-45f0-999f-f3c1882fcd2e","fw":"1.0.0","config_versao":0,"rssi_dbm":-64,"uptime_s":2754,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+22:10:16.255 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T01:10:12Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"06bcbc77-9226-45f0-999f-f3c1882fcd2e","fw":"1.0.0","config_versao":0,"rssi_dbm":-69,"uptime_s":2814,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+22:10:32.978 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T01:10:29Z","ts_sync":true,"commandId":"3c2f40a6-7a92-4db2-923e-e082fb5ba010","fase":"recebido","resultado":"ok","codigo":null}
+22:10:33.009 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T01:10:29Z","ts_sync":true,"commandId":"3c2f40a6-7a92-4db2-923e-e082fb5ba010","fase":"executado","resultado":"ok","codigo":null}
+22:10:33.022 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T01:10:29Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"ON"},"nivel":"OK","ultimo_command_id":"3c2f40a6-7a92-4db2-923e-e082fb5ba010","fw":"1.0.0","config_versao":0,"rssi_dbm":-65,"uptime_s":2831,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+22:11:33.065 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T01:11:29Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"ON"},"nivel":"OK","ultimo_command_id":"3c2f40a6-7a92-4db2-923e-e082fb5ba010","fw":"1.0.0","config_versao":0,"rssi_dbm":-58,"uptime_s":2891,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+22:12:33.100 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T01:12:29Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"ON"},"nivel":"OK","ultimo_command_id":"3c2f40a6-7a92-4db2-923e-e082fb5ba010","fw":"1.0.0","config_versao":0,"rssi_dbm":-61,"uptime_s":2951,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}
+22:13:05.860 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T01:13:02Z","ts_sync":true,"commandId":"1a20e438-e000-4bf9-b4c8-85c33b084295","fase":"recebido","resultado":"ok","codigo":null}
+22:13:05.889 > [MQTT] -> aquario/v1/ctrl-01/ack {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T01:13:02Z","ts_sync":true,"commandId":"1a20e438-e000-4bf9-b4c8-85c33b084295","fase":"executado","resultado":"ok","codigo":null}
+22:13:05.909 > [MQTT] -> aquario/v1/ctrl-01/estado {"v":1,"deviceId":"ctrl-01","ts":"2026-11-25T01:13:02Z","ts_sync":true,"modo":"AUTO","causa_seguro":null,"atuadores":{"bomba_ph_mais":"OFF","bomba_ph_menos":"OFF","aquecedor":"OFF","cooler":"OFF"},"nivel":"OK","ultimo_command_id":"1a20e438-e000-4bf9-b4c8-85c33b084295","fw":"1.0.0","config_versao":0,"rssi_dbm":-64,"uptime_s":2984,"config":{"dose_max_ms":5000,"manual_timeout_s":600,"telemetria_timeout_s":30,"rede_timeout_s":30}}

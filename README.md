@@ -120,6 +120,8 @@ Ou pela linha de comando:
 arduino-cli compile --fqbn esp32:esp32:esp32 --upload -p /dev/ttyUSB0 firmware/sonda
 ```
 
+Ou pelo **VS Code** com a extensão **PlatformIO**: abra a pasta `firmware/sonda` (ou `firmware/controlador`) como projeto, crie o `secrets.h` como acima e use **Upload** na barra do PlatformIO. Detalhes em [docs/COMO_RODAR.md](docs/COMO_RODAR.md).
+
 ### 3. Atualização OTA (R17)
 
 1. Aumente `FW_VERSAO` no `.ino` e gere o binário (Arduino IDE: *Sketch → Exportar binário compilado*).

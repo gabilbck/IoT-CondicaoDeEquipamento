@@ -71,6 +71,19 @@ Para cada placa (`firmware/sonda` e `firmware/controlador`):
 
 Em até 1 minuto, os dois dispositivos devem aparecer como online no painel.
 
+### Alternativa: gravar pelo VS Code (PlatformIO)
+
+Cada firmware tem um `platformio.ini` na própria pasta. A Arduino IDE ignora esse arquivo, então os dois jeitos funcionam.
+
+1. Instale o **VS Code** e a extensão **PlatformIO IDE**.
+2. Em **File → Open Folder**, abra `firmware/sonda` (ou `firmware/controlador`). Abra a pasta do firmware, não a raiz do repositório.
+3. Crie o `secrets.h` nessa pasta, igual ao passo acima.
+4. Na barra azul de baixo do VS Code, clique em **✓ Build** para compilar e em **→ Upload** para gravar. O ícone de tomada abre o **Serial Monitor** (115200).
+
+Na primeira vez, o PlatformIO baixa sozinho o core ESP32 3.x (pioarduino, o mesmo que o CI usa) e as bibliotecas. Isso leva alguns minutos e precisa de internet.
+
+Se a porta COM não aparecer no Windows, instale o driver USB da placa (CP210x ou CH340, conforme o chip da sua ESP32).
+
 ## 3. Comandos do dia a dia (no servidor)
 
 | Para | Comando |

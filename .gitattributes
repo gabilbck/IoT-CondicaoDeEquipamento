@@ -1,0 +1,8 @@
+# Arquivos que rodam em Linux (bash, Docker, Mosquitto) precisam de fim de linha LF,
+# mesmo quando o repositório é clonado no Windows (core.autocrlf).
+*.sh               text eol=lf
+.env*              text eol=lf
+*.yaml             text eol=lf
+*.yml              text eol=lf
+Dockerfile         text eol=lf
+infra/mosquitto/*  text eol=lf
